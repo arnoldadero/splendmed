@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { Logo } from '@/components/logo';
+import { getCartCount } from '@/lib/cart';
 import { getBrands, getCategories, getConditions } from '@/lib/catalog';
 
 /**
@@ -16,10 +17,11 @@ import { getBrands, getCategories, getConditions } from '@/lib/catalog';
  * fill a basket.
  */
 export async function SiteHeader() {
-  const [categories, conditions, brands] = await Promise.all([
+  const [categories, conditions, brands, cartCount] = await Promise.all([
     getCategories(),
     getConditions(),
     getBrands(),
+    getCartCount(),
   ]);
 
   return (
@@ -51,7 +53,10 @@ export async function SiteHeader() {
         </Link>
 
         <Link href="/cart" className="text-sm font-semibold hover:underline">
-          Cart <span className="text-muted-foreground">(0)</span>
+          Cart{' '}
+          <span className="text-muted-foreground" data-testid="cart-count">
+            ({cartCount})
+          </span>
         </Link>
       </div>
 

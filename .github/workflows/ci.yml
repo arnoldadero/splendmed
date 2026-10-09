@@ -42,3 +42,12 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      # E2E runs against the production build, which is what deploys. It is kept
+      # out of `pnpm verify` because it needs a server and takes ~2 minutes;
+      # here it is cheap insurance on every push.
+      - name: Install Playwright browser
+        run: pnpm --filter @splendmed/web exec playwright install --with-deps chromium
+
+      - name: End-to-end tests
+        run: pnpm --filter @splendmed/web test:e2e

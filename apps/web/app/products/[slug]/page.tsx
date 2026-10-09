@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { formatMoney } from '@splendmed/domain';
 
+import { AddToCart } from '@/components/add-to-cart';
 import { ProductImage } from '@/components/product-image';
 import { getProductBySlug } from '@/lib/catalog';
 
@@ -83,7 +84,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             has wasted their time.
           */}
           {needsRx && (
-            <div className="mt-6 rounded-lg border border-brand-teal bg-brand-teal/5 p-4">
+            <div
+              className="mt-6 rounded-lg border border-brand-teal bg-brand-teal/5 p-4"
+              data-testid="rx-notice"
+            >
               <h2 className="font-semibold text-brand-deep">
                 {product.dispensing === 'controlled'
                   ? 'Controlled medicine — prescription required'
@@ -97,16 +101,16 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </div>
           )}
 
-          <button
-            type="button"
+          <AddToCart
+            productId={product.id}
+            outOfStock={outOfStock}
+            needsPrescription={needsRx}
             className={
               outOfStock
                 ? 'mt-6 w-full rounded-lg border border-border px-5 py-3 font-semibold sm:w-auto'
                 : 'mt-6 w-full rounded-lg bg-primary px-5 py-3 font-semibold text-primary-foreground sm:w-auto'
             }
-          >
-            {outOfStock ? 'Notify me when available' : 'Add to cart'}
-          </button>
+          />
 
           {/*
             Availability, not a count. Stock is a stale projection of Juleb

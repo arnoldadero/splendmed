@@ -45,3 +45,8 @@ next-env.d.ts
 # permanent. The palette, fonts and logo rules they define are already encoded in
 # apps/web/lib/brand.ts, globals.css and docs/decisions/0002-logo-clear-space.md.
 *.pdf
+
+# Playwright
+apps/web/test-results/
+apps/web/playwright-report/
+apps/web/.playwright/

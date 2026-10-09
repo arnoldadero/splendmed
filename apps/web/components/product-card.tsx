@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { formatMoney, type Availability } from '@splendmed/domain';
 
+import { AddToCart } from '@/components/add-to-cart';
 import { ProductImage } from '@/components/product-image';
 import type { CatalogItem } from '@/lib/catalog';
 
@@ -86,16 +87,16 @@ export function ProductCard({ item }: { item: CatalogItem }) {
 
         <p className={`mt-1 text-xs font-medium ${status.className}`}>{status.label}</p>
 
-        <button
-          type="button"
+        <AddToCart
+          productId={product.id}
+          outOfStock={outOfStock}
+          needsPrescription={needsRx}
           className={
             outOfStock
               ? 'mt-3 w-full rounded-lg border border-border px-3 py-2 text-sm font-semibold'
               : 'mt-3 w-full rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground'
           }
-        >
-          {outOfStock ? 'Notify me' : needsRx ? 'Add — needs prescription' : 'Add to cart'}
-        </button>
+        />
       </div>
     </article>
   );
