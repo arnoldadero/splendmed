@@ -72,7 +72,12 @@ function SiteFooter() {
           pharmacist registered with the Pharmacy and Poisons Board of Kenya. We do not provide
           dosage or treatment advice online — speak to our pharmacist.
         </p>
-        <p className="mt-3">SplendMed Pharmacy · Kisumu, Kenya</p>
+        <p className="mt-3">
+          SplendMed Pharmacy · Kisumu, Kenya ·{' '}
+          <a href="/credits" className="underline">
+            Image credits
+          </a>
+        </p>
         <p className="mt-1">&copy; {new Date().getFullYear()} SplendMed Pharmacy</p>
       </div>
     </footer>

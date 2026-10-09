@@ -121,7 +121,12 @@ export function ProductImage({ product, className }: ProductImageProps) {
         alt=""
         loading="lazy"
         decoding="async"
-        className={className}
+        /*
+         * object-contain, not the default fill: the frame is square and real
+         * product photographs are not, so without this they stretch. A distorted
+         * photo of a medicine pack is worse than no photo.
+         */
+        className={`${className ?? ''} object-contain`.trim()}
       />
     );
   }
