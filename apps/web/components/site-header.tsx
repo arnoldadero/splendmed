@@ -66,8 +66,14 @@ export async function SiteHeader() {
           <TaxonMenu title="Shop by condition" axis="condition" taxa={conditions} />
           <TaxonMenu title="Shop by brand" axis="brand" taxa={brands} />
           <li>
-            <Link href="/prescriptions/new" className="font-semibold text-brand-teal hover:underline">
+            <Link href="/checkout" className="font-semibold text-brand-teal hover:underline">
               Upload a prescription
+            </Link>
+          </li>
+          <li>
+            {/* Reachable during the demo. Phase 6 gates this to the pharmacist role. */}
+            <Link href="/console" className="font-semibold text-muted-foreground hover:underline">
+              Pharmacist console
             </Link>
           </li>
         </ul>

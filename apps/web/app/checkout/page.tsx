@@ -1,18 +1,12 @@
 import Link from 'next/link';
 
-import { formatMoney } from '@splendmed/domain';
+import { addMoney, formatMoney, money } from '@splendmed/domain';
 
+import { CheckoutForm } from '@/components/checkout-form';
 import { getCart } from '@/lib/cart';
 
 export const metadata = { title: 'Checkout' };
 
-/**
- * Checkout is honest about where it stops.
- *
- * Payment is Phase 5 (M-Pesa STK push) and prescription upload is Phase 4.
- * Taking an order we cannot fulfil, or implying one was placed, would be far
- * worse than saying plainly that this is not live yet.
- */
 export default async function CheckoutPage() {
   const cart = await getCart();
 
@@ -27,40 +21,39 @@ export default async function CheckoutPage() {
     );
   }
 
+  const delivery = money(20000);
+
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
       <h1 className="text-3xl font-bold">Checkout</h1>
 
-      <div className="mt-6 rounded-lg border border-border p-5">
-        <p className="flex justify-between">
-          <span className="text-muted-foreground">
-            {cart.itemCount} {cart.itemCount === 1 ? 'item' : 'items'}
+      <ul className="mt-6 divide-y divide-border rounded-lg border border-border">
+        {cart.lines.map(({ item, quantity, lineTotal }) => (
+          <li key={item.product.id} className="flex justify-between gap-4 p-4 text-sm">
+            <span>
+              {item.product.name}
+              {item.product.strength ? ` ${item.product.strength}` : ''}
+              <span className="text-muted-foreground"> × {quantity}</span>
+              {item.product.dispensing !== 'otc' && (
+                <span className="ml-2 text-xs font-semibold text-brand-teal">Rx</span>
+              )}
+            </span>
+            <span className="font-semibold">{formatMoney(lineTotal)}</span>
+          </li>
+        ))}
+        <li className="flex justify-between p-4 text-sm">
+          <span className="text-muted-foreground">Delivery (Kisumu)</span>
+          <span>{formatMoney(delivery)}</span>
+        </li>
+        <li className="flex justify-between bg-secondary p-4 font-bold">
+          <span>Total</span>
+          <span data-testid="checkout-total">
+            {formatMoney(addMoney(cart.subtotal, delivery))}
           </span>
-          <span className="font-bold">{formatMoney(cart.subtotal)}</span>
-        </p>
-      </div>
+        </li>
+      </ul>
 
-      <div
-        className="mt-8 rounded-lg border border-brand-teal bg-brand-teal/5 p-5"
-        data-testid="checkout-notice"
-      >
-        <h2 className="font-semibold text-brand-deep">Checkout is not live yet</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          We are not taking payment or dispensing orders through this site yet. M-Pesa payment
-          arrives in Phase 5
-          {cart.requiresPrescription
-            ? ', and prescription upload with pharmacist review in Phases 4 and 6.'
-            : '.'}{' '}
-          Your cart is saved. Nothing has been charged and no order has been placed.
-        </p>
-        <p className="mt-3 text-sm text-muted-foreground">
-          To order today, call or visit the Kisumu CBD branch.
-        </p>
-      </div>
-
-      <Link href="/cart" className="mt-8 inline-block font-semibold text-brand-teal hover:underline">
-        Back to cart
-      </Link>
+      <CheckoutForm requiresPrescription={cart.requiresPrescription} />
     </div>
   );
 }
