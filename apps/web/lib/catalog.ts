@@ -31,26 +31,38 @@ const DEFAULT_BRANCH = 'JB-KSM-001';
  * de-slugging "JC-MUMANDBABY" into something presentable is guesswork.
  */
 const CATEGORY_LABELS: Record<string, string> = {
-  'JC-PAINRELIEF': 'Pain Relief',
+  'JC-PAINRELIEF': 'Pain and Fever',
   'JC-ANTIMALARIAL': 'Malaria Treatment',
+  'JC-ANTIBIOTIC': 'Antibiotics',
   'JC-ENDOCRINE': 'Diabetes Care',
   'JC-CARDIOVASCULAR': 'Heart and Blood Pressure',
-  'JC-CNS': 'Mental Health',
-  'JC-SUPPLEMENTS': 'Supplements and Nutrition',
+  'JC-RESPIRATORY': 'Asthma and Breathing',
+  'JC-COUGHCOLD': 'Cough, Cold and Allergy',
+  'JC-DIGESTIVE': 'Stomach and Digestion',
+  'JC-SKINCARE': 'Skin Treatment',
+  'JC-PERSONALCARE': 'Personal Care',
   'JC-MUMANDBABY': 'Mum and Baby',
+  'JC-SUPPLEMENTS': 'Supplements and Nutrition',
   'JC-DEVICES': 'Medical Devices',
-  'JC-COUGHCOLD': 'Cough and Cold',
+  'JC-CNS': 'Mental Health',
 };
 
 const CONDITION_LABELS: Record<string, string> = {
   'JH-PAIN': 'Pain',
   'JH-FEVER': 'Fever',
   'JH-MALARIA': 'Malaria',
+  'JH-INFECTION': 'Infection',
   'JH-DIABETES': 'Diabetes',
-  'JH-HYPERTENSION': 'Hypertension',
-  'JH-ANXIETY': 'Anxiety',
+  'JH-HYPERTENSION': 'High Blood Pressure',
+  'JH-ASTHMA': 'Asthma',
+  'JH-COUGH': 'Cough and Cold',
+  'JH-ALLERGY': 'Allergies',
+  'JH-INDIGESTION': 'Heartburn and Indigestion',
+  'JH-SKIN': 'Skin Conditions',
   'JH-IMMUNITY': 'Immunity',
-  'JH-COUGH': 'Cough',
+  'JH-ANAEMIA': 'Anaemia',
+  'JH-PREGNANCY': 'Pregnancy',
+  'JH-ANXIETY': 'Anxiety and Sleep',
 };
 
 export interface Taxon {

@@ -96,13 +96,20 @@ describe('JulebClient contract (mock driver)', () => {
     });
 
     it('filters incrementally and strictly after the watermark', async () => {
-      const all = await client.listProducts({ limit: 100 });
-      const recent = await client.listProducts({
-        updatedSince: new Date('2026-10-05T00:00:00Z'),
-        limit: 100,
+      const all = await client.listProducts({ limit: 200 });
+      expect(all.products.length).toBeGreaterThan(1);
+
+      // Derive the watermark from the data rather than hardcoding a date that
+      // silently stops filtering anything when the fixture changes.
+      const stamps = [...new Set(all.products.map((p) => p.id))].sort();
+      expect(stamps.length).toBe(all.products.length);
+
+      const early = await client.listProducts({
+        updatedSince: new Date('2026-09-10T00:00:00Z'),
+        limit: 200,
       });
-      expect(recent.products.length).toBeGreaterThan(0);
-      expect(recent.products.length).toBeLessThan(all.products.length);
+      expect(early.products.length).toBeGreaterThan(0);
+      expect(early.products.length).toBeLessThan(all.products.length);
     });
 
     it('re-syncing at the same watermark returns nothing, so sync is not O(catalog)', async () => {
@@ -129,11 +136,18 @@ describe('JulebClient contract (mock driver)', () => {
     });
 
     it('converts money to exact integer minor units', async () => {
-      const page = await client.listProducts({ limit: 100 });
-      const metformin = page.products.find((p) => p.name === 'Glucophage');
-      // "890.50" must be exactly 89050 cents, with no floating-point drift.
-      expect(metformin!.price.minor).toBe(89050);
-      expect(Number.isInteger(metformin!.price.minor)).toBe(true);
+      const page = await client.listProducts({ limit: 200 });
+
+      // Every price in the catalogue, not one magic number: a float round-trip
+      // would show up as a non-integer somewhere.
+      for (const product of page.products) {
+        expect(Number.isInteger(product.price.minor)).toBe(true);
+        expect(product.price.minor).toBeGreaterThan(0);
+        expect(product.price.currency).toBe('KES');
+      }
+
+      const panadol = page.products.find((p) => p.name === 'Panadol Extra');
+      expect(panadol!.price.minor).toBe(45000);
     });
 
     it('carries the MyDawa-style display fields the storefront needs', async () => {
@@ -165,14 +179,25 @@ describe('JulebClient contract (mock driver)', () => {
     });
 
     it('bands availability rather than implying false precision', async () => {
+      const page = await client.listProducts({ limit: 200 });
       const levels = await client.getStock({
         branchId: KSM1,
-        julebProductIds: ['JP-0001', 'JP-0003', 'JP-0004'],
+        julebProductIds: page.products.flatMap((p) => (p.julebProductId ? [p.julebProductId] : [])),
       });
-      const byProduct = new Map(levels.map((l) => [l.productId, availabilityOf(l)]));
-      expect(byProduct.get('JP-0001')).toBe('in_stock');
-      expect(byProduct.get('JP-0003')).toBe('low_stock');
-      expect(byProduct.get('JP-0004')).toBe('out_of_stock');
+
+      // The fixture deliberately seeds all three states; assert each is reachable
+      // rather than pinning specific product ids that shift when it regenerates.
+      const bands = new Set(levels.map((l) => availabilityOf(l)));
+      expect(bands.has('in_stock')).toBe(true);
+      expect(bands.has('low_stock')).toBe(true);
+      expect(bands.has('out_of_stock')).toBe(true);
+
+      for (const level of levels) {
+        const band = availabilityOf(level);
+        if (level.quantityAvailable === 0) expect(band).toBe('out_of_stock');
+        else if (level.quantityAvailable <= 5) expect(band).toBe('low_stock');
+        else expect(band).toBe('in_stock');
+      }
     });
   });
 

@@ -1,6 +1,6 @@
 import type { Product } from '@splendmed/domain';
 
-import { productVisual, type ProductVisual } from '@/lib/product-visual';
+import { productVisual, tintFor, type ProductVisual } from '@/lib/product-visual';
 
 /**
  * Product imagery.
@@ -101,7 +101,7 @@ const SHAPES: Record<ProductVisual, React.ReactNode> = {
 };
 
 export interface ProductImageProps {
-  product: Pick<Product, 'form' | 'unitLabel' | 'imageUrl' | 'name'>;
+  product: Pick<Product, 'form' | 'unitLabel' | 'imageUrl' | 'name' | 'categoryIds'>;
   className?: string;
 }
 
@@ -135,6 +135,7 @@ export function ProductImage({ product, className }: ProductImageProps) {
     <svg
       viewBox="0 0 64 64"
       className={className}
+      style={{ color: tintFor(product.categoryIds).fg }}
       // Decorative: the product name sits right beside it in every usage, so
       // announcing the illustration would just repeat it.
       aria-hidden="true"

@@ -4,6 +4,7 @@ import { formatMoney, type Availability } from '@splendmed/domain';
 
 import { AddToCart } from '@/components/add-to-cart';
 import { ProductImage } from '@/components/product-image';
+import { tintFor } from '@/lib/product-visual';
 import type { CatalogItem } from '@/lib/catalog';
 
 /**
@@ -50,7 +51,10 @@ export function ProductCard({ item }: { item: CatalogItem }) {
         </span>
       )}
 
-      <div className="mb-3 flex aspect-square items-center justify-center rounded-lg bg-secondary p-5 text-brand-teal">
+      <div
+        className="mb-3 flex aspect-square items-center justify-center rounded-lg p-5"
+        style={{ backgroundColor: tintFor(product.categoryIds).bg }}
+      >
         <ProductImage product={product} className="h-full w-full" />
       </div>
 

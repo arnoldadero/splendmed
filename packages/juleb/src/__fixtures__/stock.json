@@ -1,13 +1,650 @@
 [
-  { "branch_id": "JB-KSM-001", "product_id": "JP-0001", "quantity_available": 120, "as_of": "2026-10-09T06:00:00Z" },
-  { "branch_id": "JB-KSM-001", "product_id": "JP-0002", "quantity_available": 18, "as_of": "2026-10-09T06:00:00Z" },
-  { "branch_id": "JB-KSM-001", "product_id": "JP-0003", "quantity_available": 4, "as_of": "2026-10-09T06:00:00Z" },
-  { "branch_id": "JB-KSM-001", "product_id": "JP-0004", "quantity_available": 0, "as_of": "2026-10-09T06:00:00Z" },
-  { "branch_id": "JB-KSM-001", "product_id": "JP-0005", "quantity_available": 2, "as_of": "2026-10-09T06:00:00Z" },
-  { "branch_id": "JB-KSM-001", "product_id": "JP-0006", "quantity_available": 65, "as_of": "2026-10-09T06:00:00Z" },
-  { "branch_id": "JB-KSM-001", "product_id": "JP-0007", "quantity_available": 31, "as_of": "2026-10-09T06:00:00Z" },
-  { "branch_id": "JB-KSM-001", "product_id": "JP-0008", "quantity_available": 7, "as_of": "2026-10-09T06:00:00Z" },
-  { "branch_id": "JB-KSM-002", "product_id": "JP-0001", "quantity_available": 44, "as_of": "2026-10-09T06:00:00Z" },
-  { "branch_id": "JB-KSM-002", "product_id": "JP-0002", "quantity_available": 0, "as_of": "2026-10-09T06:00:00Z" },
-  { "branch_id": "JB-KSM-002", "product_id": "JP-0003", "quantity_available": 52, "as_of": "2026-10-09T06:00:00Z" }
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0001",
+    "quantity_available": 20,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0001",
+    "quantity_available": 10,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0002",
+    "quantity_available": 37,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0002",
+    "quantity_available": 18,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0003",
+    "quantity_available": 54,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0003",
+    "quantity_available": 27,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0004",
+    "quantity_available": 0,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0004",
+    "quantity_available": 0,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0005",
+    "quantity_available": 88,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0005",
+    "quantity_available": 44,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0006",
+    "quantity_available": 4,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0006",
+    "quantity_available": 2,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0007",
+    "quantity_available": 32,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0007",
+    "quantity_available": 16,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0008",
+    "quantity_available": 49,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0008",
+    "quantity_available": 24,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0009",
+    "quantity_available": 66,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0009",
+    "quantity_available": 33,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0010",
+    "quantity_available": 83,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0010",
+    "quantity_available": 41,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0011",
+    "quantity_available": 100,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0011",
+    "quantity_available": 50,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0012",
+    "quantity_available": 27,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0012",
+    "quantity_available": 13,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0013",
+    "quantity_available": 44,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0013",
+    "quantity_available": 22,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0014",
+    "quantity_available": 61,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0014",
+    "quantity_available": 30,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0015",
+    "quantity_available": 0,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0015",
+    "quantity_available": 0,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0016",
+    "quantity_available": 95,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0016",
+    "quantity_available": 47,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0017",
+    "quantity_available": 22,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0017",
+    "quantity_available": 11,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0018",
+    "quantity_available": 39,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0018",
+    "quantity_available": 19,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0019",
+    "quantity_available": 56,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0019",
+    "quantity_available": 28,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0020",
+    "quantity_available": 73,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0020",
+    "quantity_available": 36,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0021",
+    "quantity_available": 90,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0021",
+    "quantity_available": 45,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0022",
+    "quantity_available": 107,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0022",
+    "quantity_available": 53,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0023",
+    "quantity_available": 34,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0023",
+    "quantity_available": 17,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0024",
+    "quantity_available": 4,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0024",
+    "quantity_available": 2,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0025",
+    "quantity_available": 68,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0025",
+    "quantity_available": 34,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0026",
+    "quantity_available": 0,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0026",
+    "quantity_available": 0,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0027",
+    "quantity_available": 102,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0027",
+    "quantity_available": 51,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0028",
+    "quantity_available": 29,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0028",
+    "quantity_available": 14,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0029",
+    "quantity_available": 46,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0029",
+    "quantity_available": 23,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0030",
+    "quantity_available": 63,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0030",
+    "quantity_available": 31,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0031",
+    "quantity_available": 80,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0031",
+    "quantity_available": 40,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0032",
+    "quantity_available": 97,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0032",
+    "quantity_available": 48,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0033",
+    "quantity_available": 4,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0033",
+    "quantity_available": 2,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0034",
+    "quantity_available": 41,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0034",
+    "quantity_available": 20,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0035",
+    "quantity_available": 58,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0035",
+    "quantity_available": 29,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0036",
+    "quantity_available": 75,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0036",
+    "quantity_available": 37,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0037",
+    "quantity_available": 0,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0037",
+    "quantity_available": 0,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0038",
+    "quantity_available": 109,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0038",
+    "quantity_available": 54,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0039",
+    "quantity_available": 36,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0039",
+    "quantity_available": 18,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0040",
+    "quantity_available": 53,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0040",
+    "quantity_available": 26,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0041",
+    "quantity_available": 70,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0041",
+    "quantity_available": 35,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0042",
+    "quantity_available": 4,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0042",
+    "quantity_available": 2,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0043",
+    "quantity_available": 104,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0043",
+    "quantity_available": 52,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0044",
+    "quantity_available": 31,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0044",
+    "quantity_available": 15,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0045",
+    "quantity_available": 48,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0045",
+    "quantity_available": 24,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0046",
+    "quantity_available": 65,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0046",
+    "quantity_available": 32,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0047",
+    "quantity_available": 82,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0047",
+    "quantity_available": 41,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0048",
+    "quantity_available": 0,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0048",
+    "quantity_available": 0,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0049",
+    "quantity_available": 26,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0049",
+    "quantity_available": 13,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0050",
+    "quantity_available": 43,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0050",
+    "quantity_available": 21,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0051",
+    "quantity_available": 4,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0051",
+    "quantity_available": 2,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0052",
+    "quantity_available": 77,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0052",
+    "quantity_available": 38,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0053",
+    "quantity_available": 94,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0053",
+    "quantity_available": 47,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-001",
+    "product_id": "JP-0054",
+    "quantity_available": 21,
+    "as_of": "2026-10-09T06:00:00Z"
+  },
+  {
+    "branch_id": "JB-KSM-002",
+    "product_id": "JP-0054",
+    "quantity_available": 10,
+    "as_of": "2026-10-09T06:00:00Z"
+  }
 ]

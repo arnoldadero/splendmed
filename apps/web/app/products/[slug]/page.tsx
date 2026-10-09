@@ -5,6 +5,7 @@ import { formatMoney } from '@splendmed/domain';
 
 import { AddToCart } from '@/components/add-to-cart';
 import { ProductImage } from '@/components/product-image';
+import { tintFor } from '@/lib/product-visual';
 import { getProductBySlug } from '@/lib/catalog';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -25,7 +26,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="flex aspect-square items-center justify-center rounded-xl bg-secondary p-16 text-brand-teal">
+        <div
+          className="flex aspect-square items-center justify-center rounded-xl p-16"
+          style={{ backgroundColor: tintFor(product.categoryIds).bg }}
+        >
           <ProductImage product={product} className="h-full w-full" />
         </div>
 

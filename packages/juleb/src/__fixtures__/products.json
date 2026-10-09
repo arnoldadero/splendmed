@@ -1,101 +1,1538 @@
 [
   {
-    "id": "JP-0001", "name": "Panadol Extra", "generic_name": "Paracetamol + Caffeine",
-    "brand": { "id": "JBR-GSK", "name": "Panadol" },
-    "form": "tablet", "strength": "500mg/65mg", "pack_size": "24 tablets",
-    "unit_of_sale": "pack", "dispensing_class": "OTC",
-    "price": { "amount": "450.00", "currency": "KES" },
-    "compare_at_price": { "amount": "600.00", "currency": "KES" },
-    "vat_rate": 0, "image_url": null,
-    "category_ids": ["JC-PAINRELIEF"], "condition_ids": ["JH-PAIN", "JH-FEVER"],
-    "is_active": true, "updated_at": "2026-10-01T08:00:00Z"
+    "id": "JP-0001",
+    "name": "Panadol Extra",
+    "generic_name": "Paracetamol + Caffeine",
+    "brand": {
+      "id": "JBR-PANADOL",
+      "name": "Panadol"
+    },
+    "form": "tablet",
+    "strength": "500mg/65mg",
+    "pack_size": "24 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "450.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "600.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-PAINRELIEF"
+    ],
+    "condition_ids": [
+      "JH-PAIN",
+      "JH-FEVER"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-01T08:00:00Z"
   },
   {
-    "id": "JP-0002", "name": "Coartem", "generic_name": "Artemether + Lumefantrine",
-    "brand": { "id": "JBR-NOVARTIS", "name": "Coartem" },
-    "form": "tablet", "strength": "20mg/120mg", "pack_size": "24 tablets",
-    "unit_of_sale": "pack", "dispensing_class": "POM",
-    "price": { "amount": "1250.00", "currency": "KES" },
+    "id": "JP-0002",
+    "name": "Panadol Advance",
+    "generic_name": "Paracetamol",
+    "brand": {
+      "id": "JBR-PANADOL",
+      "name": "Panadol"
+    },
+    "form": "tablet",
+    "strength": "500mg",
+    "pack_size": "24 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "380.00",
+      "currency": "KES"
+    },
     "compare_at_price": null,
-    "vat_rate": 0, "image_url": null,
-    "category_ids": ["JC-ANTIMALARIAL"], "condition_ids": ["JH-MALARIA"],
-    "is_active": true, "updated_at": "2026-10-02T08:00:00Z"
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-PAINRELIEF"
+    ],
+    "condition_ids": [
+      "JH-PAIN",
+      "JH-FEVER"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-02T08:00:00Z"
   },
   {
-    "id": "JP-0003", "name": "Glucophage", "generic_name": "Metformin Hydrochloride",
-    "brand": { "id": "JBR-MERCK", "name": "Glucophage" },
-    "form": "tablet", "strength": "500mg", "pack_size": "60 tablets",
-    "unit_of_sale": "pack", "dispensing_class": "prescription_only",
-    "price": { "amount": "890.50", "currency": "KES" },
-    "compare_at_price": { "amount": "1100.00", "currency": "KES" },
-    "vat_rate": 0, "image_url": null,
-    "category_ids": ["JC-ENDOCRINE"], "condition_ids": ["JH-DIABETES"],
-    "is_active": true, "updated_at": "2026-10-03T08:00:00Z"
+    "id": "JP-0003",
+    "name": "Brufen",
+    "generic_name": "Ibuprofen",
+    "brand": {
+      "id": "JBR-BRUFEN",
+      "name": "Brufen"
+    },
+    "form": "tablet",
+    "strength": "400mg",
+    "pack_size": "30 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "520.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "650.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-PAINRELIEF"
+    ],
+    "condition_ids": [
+      "JH-PAIN"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-03T08:00:00Z"
   },
   {
-    "id": "JP-0004", "name": "Losartan Potassium", "generic_name": "Losartan Potassium",
+    "id": "JP-0004",
+    "name": "Hedex",
+    "generic_name": "Paracetamol + Caffeine",
+    "brand": {
+      "id": "JBR-HEDEX",
+      "name": "Hedex"
+    },
+    "form": "tablet",
+    "strength": "500mg",
+    "pack_size": "12 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "160.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-PAINRELIEF"
+    ],
+    "condition_ids": [
+      "JH-PAIN"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-04T08:00:00Z"
+  },
+  {
+    "id": "JP-0005",
+    "name": "Diclofenac Sodium",
+    "generic_name": "Diclofenac Sodium",
     "brand": null,
-    "form": "tablet", "strength": "50mg", "pack_size": "30 tablets",
-    "unit_of_sale": "pack", "dispensing_class": "rx",
-    "price": { "amount": "720.00", "currency": "KES" },
+    "form": "tablet",
+    "strength": "50mg",
+    "pack_size": "30 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "340.00",
+      "currency": "KES"
+    },
     "compare_at_price": null,
-    "vat_rate": 0, "image_url": null,
-    "category_ids": ["JC-CARDIOVASCULAR"], "condition_ids": ["JH-HYPERTENSION"],
-    "is_active": true, "updated_at": "2026-10-03T09:00:00Z"
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-PAINRELIEF"
+    ],
+    "condition_ids": [
+      "JH-PAIN"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-05T08:00:00Z"
   },
   {
-    "id": "JP-0005", "name": "Diazepam", "generic_name": "Diazepam",
+    "id": "JP-0006",
+    "name": "Mara Moja",
+    "generic_name": "Paracetamol + Caffeine + Aspirin",
+    "brand": {
+      "id": "JBR-MARAMOJA",
+      "name": "Mara Moja"
+    },
+    "form": "tablet",
+    "strength": "500mg",
+    "pack_size": "10 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "60.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-PAINRELIEF"
+    ],
+    "condition_ids": [
+      "JH-PAIN",
+      "JH-FEVER"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-06T08:00:00Z"
+  },
+  {
+    "id": "JP-0007",
+    "name": "Voltaren Emulgel",
+    "generic_name": "Diclofenac Diethylamine",
+    "brand": {
+      "id": "JBR-VOLTAREN",
+      "name": "Voltaren"
+    },
+    "form": "gel",
+    "strength": "1%",
+    "pack_size": "50g",
+    "unit_of_sale": "tube",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "980.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "1200.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-PAINRELIEF"
+    ],
+    "condition_ids": [
+      "JH-PAIN"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-07T08:00:00Z"
+  },
+  {
+    "id": "JP-0008",
+    "name": "Coartem",
+    "generic_name": "Artemether + Lumefantrine",
+    "brand": {
+      "id": "JBR-COARTEM",
+      "name": "Coartem"
+    },
+    "form": "tablet",
+    "strength": "20mg/120mg",
+    "pack_size": "24 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "1250.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-ANTIMALARIAL"
+    ],
+    "condition_ids": [
+      "JH-MALARIA"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-08T08:00:00Z"
+  },
+  {
+    "id": "JP-0009",
+    "name": "Duo-Cotecxin",
+    "generic_name": "Dihydroartemisinin + Piperaquine",
+    "brand": {
+      "id": "JBR-DUOCOTECXIN",
+      "name": "Duo-Cotecxin"
+    },
+    "form": "tablet",
+    "strength": "40mg/320mg",
+    "pack_size": "8 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "980.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "1150.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-ANTIMALARIAL"
+    ],
+    "condition_ids": [
+      "JH-MALARIA"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-09T08:00:00Z"
+  },
+  {
+    "id": "JP-0010",
+    "name": "Artefan",
+    "generic_name": "Artemether + Lumefantrine",
+    "brand": {
+      "id": "JBR-ARTEFAN",
+      "name": "Artefan"
+    },
+    "form": "tablet",
+    "strength": "20mg/120mg",
+    "pack_size": "24 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "890.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-ANTIMALARIAL"
+    ],
+    "condition_ids": [
+      "JH-MALARIA"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-10T08:00:00Z"
+  },
+  {
+    "id": "JP-0011",
+    "name": "Malaria Rapid Test Kit",
+    "generic_name": null,
     "brand": null,
-    "form": "tablet", "strength": "5mg", "pack_size": "10 tablets",
-    "unit_of_sale": "pack", "dispensing_class": "controlled",
-    "price": { "amount": "310.00", "currency": "KES" },
+    "form": "device",
+    "strength": null,
+    "pack_size": "1 test",
+    "unit_of_sale": "box",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "250.00",
+      "currency": "KES"
+    },
     "compare_at_price": null,
-    "vat_rate": 0, "image_url": null,
-    "category_ids": ["JC-CNS"], "condition_ids": ["JH-ANXIETY"],
-    "is_active": true, "updated_at": "2026-10-04T08:00:00Z"
+    "vat_rate": 0.16,
+    "image_url": null,
+    "category_ids": [
+      "JC-DEVICES"
+    ],
+    "condition_ids": [
+      "JH-MALARIA"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-11T08:00:00Z"
   },
   {
-    "id": "JP-0006", "name": "Vitamin C 1000mg Effervescent", "generic_name": "Ascorbic Acid",
-    "brand": { "id": "JBR-REDOXON", "name": "Redoxon" },
-    "form": "effervescent tablet", "strength": "1000mg", "pack_size": "10 tablets",
-    "unit_of_sale": "tube", "dispensing_class": "otc",
-    "price": { "amount": "550.00", "currency": "KES" },
-    "compare_at_price": { "amount": "650.00", "currency": "KES" },
-    "vat_rate": 0.16, "image_url": null,
-    "category_ids": ["JC-SUPPLEMENTS"], "condition_ids": ["JH-IMMUNITY"],
-    "is_active": true, "updated_at": "2026-10-05T08:00:00Z"
-  },
-  {
-    "id": "JP-0007", "name": "Calpol Paediatric Suspension", "generic_name": "Paracetamol",
-    "brand": { "id": "JBR-CALPOL", "name": "Calpol" },
-    "form": "oral suspension", "strength": "120mg/5ml", "pack_size": "100ml",
-    "unit_of_sale": "bottle", "dispensing_class": "OTC",
-    "price": { "amount": "380.00", "currency": "KES" },
+    "id": "JP-0012",
+    "name": "Amoxil",
+    "generic_name": "Amoxicillin",
+    "brand": {
+      "id": "JBR-AMOXIL",
+      "name": "Amoxil"
+    },
+    "form": "capsule",
+    "strength": "500mg",
+    "pack_size": "21 capsules",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "640.00",
+      "currency": "KES"
+    },
     "compare_at_price": null,
-    "vat_rate": 0, "image_url": null,
-    "category_ids": ["JC-MUMANDBABY"], "condition_ids": ["JH-FEVER", "JH-PAIN"],
-    "is_active": true, "updated_at": "2026-10-06T08:00:00Z"
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-ANTIBIOTIC"
+    ],
+    "condition_ids": [
+      "JH-INFECTION"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-12T08:00:00Z"
   },
   {
-    "id": "JP-0008", "name": "Accu-Chek Active Glucometer Kit", "generic_name": null,
-    "brand": { "id": "JBR-ROCHE", "name": "Accu-Chek" },
-    "form": "device", "strength": null, "pack_size": "1 kit",
-    "unit_of_sale": "box", "dispensing_class": "otc",
-    "price": { "amount": "3450.00", "currency": "KES" },
-    "compare_at_price": { "amount": "4200.00", "currency": "KES" },
-    "vat_rate": 0.16, "image_url": null,
-    "category_ids": ["JC-DEVICES"], "condition_ids": ["JH-DIABETES"],
-    "is_active": true, "updated_at": "2026-10-07T08:00:00Z"
+    "id": "JP-0013",
+    "name": "Augmentin",
+    "generic_name": "Amoxicillin + Clavulanic Acid",
+    "brand": {
+      "id": "JBR-AUGMENTIN",
+      "name": "Augmentin"
+    },
+    "form": "tablet",
+    "strength": "625mg",
+    "pack_size": "14 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "1850.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "2100.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-ANTIBIOTIC"
+    ],
+    "condition_ids": [
+      "JH-INFECTION"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-13T08:00:00Z"
   },
   {
-    "id": "JP-0009", "name": "Discontinued Cough Syrup", "generic_name": "Dextromethorphan",
+    "id": "JP-0014",
+    "name": "Azithromycin",
+    "generic_name": "Azithromycin",
     "brand": null,
-    "form": "syrup", "strength": "15mg/5ml", "pack_size": "100ml",
-    "unit_of_sale": "bottle", "dispensing_class": "otc",
-    "price": { "amount": "290.00", "currency": "KES" },
+    "form": "tablet",
+    "strength": "500mg",
+    "pack_size": "3 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "450.00",
+      "currency": "KES"
+    },
     "compare_at_price": null,
-    "vat_rate": 0, "image_url": null,
-    "category_ids": ["JC-COUGHCOLD"], "condition_ids": ["JH-COUGH"],
-    "is_active": false, "updated_at": "2026-10-08T08:00:00Z"
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-ANTIBIOTIC"
+    ],
+    "condition_ids": [
+      "JH-INFECTION"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-14T08:00:00Z"
+  },
+  {
+    "id": "JP-0015",
+    "name": "Ciprofloxacin",
+    "generic_name": "Ciprofloxacin",
+    "brand": null,
+    "form": "tablet",
+    "strength": "500mg",
+    "pack_size": "10 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "380.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-ANTIBIOTIC"
+    ],
+    "condition_ids": [
+      "JH-INFECTION"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-15T08:00:00Z"
+  },
+  {
+    "id": "JP-0016",
+    "name": "Flagyl",
+    "generic_name": "Metronidazole",
+    "brand": {
+      "id": "JBR-FLAGYL",
+      "name": "Flagyl"
+    },
+    "form": "tablet",
+    "strength": "400mg",
+    "pack_size": "21 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "290.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-ANTIBIOTIC"
+    ],
+    "condition_ids": [
+      "JH-INFECTION"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-16T08:00:00Z"
+  },
+  {
+    "id": "JP-0017",
+    "name": "Glucophage",
+    "generic_name": "Metformin Hydrochloride",
+    "brand": {
+      "id": "JBR-GLUCOPHAGE",
+      "name": "Glucophage"
+    },
+    "form": "tablet",
+    "strength": "500mg",
+    "pack_size": "60 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "890.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "1100.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-ENDOCRINE"
+    ],
+    "condition_ids": [
+      "JH-DIABETES"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-17T08:00:00Z"
+  },
+  {
+    "id": "JP-0018",
+    "name": "Metformin",
+    "generic_name": "Metformin Hydrochloride",
+    "brand": null,
+    "form": "tablet",
+    "strength": "850mg",
+    "pack_size": "60 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "520.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-ENDOCRINE"
+    ],
+    "condition_ids": [
+      "JH-DIABETES"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-18T08:00:00Z"
+  },
+  {
+    "id": "JP-0019",
+    "name": "Glibenclamide",
+    "generic_name": "Glibenclamide",
+    "brand": null,
+    "form": "tablet",
+    "strength": "5mg",
+    "pack_size": "30 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "180.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-ENDOCRINE"
+    ],
+    "condition_ids": [
+      "JH-DIABETES"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-19T08:00:00Z"
+  },
+  {
+    "id": "JP-0020",
+    "name": "Accu-Chek Active Glucometer",
+    "generic_name": null,
+    "brand": {
+      "id": "JBR-ACCUCHEK",
+      "name": "Accu-Chek"
+    },
+    "form": "device",
+    "strength": null,
+    "pack_size": "1 kit",
+    "unit_of_sale": "box",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "3450.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "4200.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0.16,
+    "image_url": null,
+    "category_ids": [
+      "JC-DEVICES"
+    ],
+    "condition_ids": [
+      "JH-DIABETES"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-20T08:00:00Z"
+  },
+  {
+    "id": "JP-0021",
+    "name": "Accu-Chek Test Strips",
+    "generic_name": null,
+    "brand": {
+      "id": "JBR-ACCUCHEK",
+      "name": "Accu-Chek"
+    },
+    "form": "device",
+    "strength": null,
+    "pack_size": "50 strips",
+    "unit_of_sale": "box",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "2100.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0.16,
+    "image_url": null,
+    "category_ids": [
+      "JC-DEVICES"
+    ],
+    "condition_ids": [
+      "JH-DIABETES"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-21T08:00:00Z"
+  },
+  {
+    "id": "JP-0022",
+    "name": "Losartan Potassium",
+    "generic_name": "Losartan Potassium",
+    "brand": null,
+    "form": "tablet",
+    "strength": "50mg",
+    "pack_size": "30 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "720.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-CARDIOVASCULAR"
+    ],
+    "condition_ids": [
+      "JH-HYPERTENSION"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-22T08:00:00Z"
+  },
+  {
+    "id": "JP-0023",
+    "name": "Amlodipine",
+    "generic_name": "Amlodipine Besylate",
+    "brand": null,
+    "form": "tablet",
+    "strength": "5mg",
+    "pack_size": "30 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "310.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "400.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-CARDIOVASCULAR"
+    ],
+    "condition_ids": [
+      "JH-HYPERTENSION"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-23T08:00:00Z"
+  },
+  {
+    "id": "JP-0024",
+    "name": "Atenolol",
+    "generic_name": "Atenolol",
+    "brand": null,
+    "form": "tablet",
+    "strength": "50mg",
+    "pack_size": "28 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "260.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-CARDIOVASCULAR"
+    ],
+    "condition_ids": [
+      "JH-HYPERTENSION"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-24T08:00:00Z"
+  },
+  {
+    "id": "JP-0025",
+    "name": "Aspirin Cardio",
+    "generic_name": "Acetylsalicylic Acid",
+    "brand": {
+      "id": "JBR-ASPIRIN",
+      "name": "Aspirin"
+    },
+    "form": "tablet",
+    "strength": "75mg",
+    "pack_size": "30 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "190.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-CARDIOVASCULAR"
+    ],
+    "condition_ids": [
+      "JH-HYPERTENSION"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-25T08:00:00Z"
+  },
+  {
+    "id": "JP-0026",
+    "name": "Omron Blood Pressure Monitor",
+    "generic_name": null,
+    "brand": {
+      "id": "JBR-OMRON",
+      "name": "Omron"
+    },
+    "form": "device",
+    "strength": null,
+    "pack_size": "1 unit",
+    "unit_of_sale": "box",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "6500.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "7800.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0.16,
+    "image_url": null,
+    "category_ids": [
+      "JC-DEVICES"
+    ],
+    "condition_ids": [
+      "JH-HYPERTENSION"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-26T08:00:00Z"
+  },
+  {
+    "id": "JP-0027",
+    "name": "Actifed",
+    "generic_name": "Triprolidine + Pseudoephedrine",
+    "brand": {
+      "id": "JBR-ACTIFED",
+      "name": "Actifed"
+    },
+    "form": "syrup",
+    "strength": "100ml",
+    "pack_size": "100ml",
+    "unit_of_sale": "bottle",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "420.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-COUGHCOLD"
+    ],
+    "condition_ids": [
+      "JH-COUGH"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-27T08:00:00Z"
+  },
+  {
+    "id": "JP-0028",
+    "name": "Benylin Dry Cough",
+    "generic_name": "Dextromethorphan",
+    "brand": {
+      "id": "JBR-BENYLIN",
+      "name": "Benylin"
+    },
+    "form": "syrup",
+    "strength": "15mg/5ml",
+    "pack_size": "100ml",
+    "unit_of_sale": "bottle",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "480.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "560.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-COUGHCOLD"
+    ],
+    "condition_ids": [
+      "JH-COUGH"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-01T08:00:00Z"
+  },
+  {
+    "id": "JP-0029",
+    "name": "Strepsils Honey and Lemon",
+    "generic_name": "Amylmetacresol",
+    "brand": {
+      "id": "JBR-STREPSILS",
+      "name": "Strepsils"
+    },
+    "form": "lozenge",
+    "strength": null,
+    "pack_size": "24 lozenges",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "280.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-COUGHCOLD"
+    ],
+    "condition_ids": [
+      "JH-COUGH"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-02T08:00:00Z"
+  },
+  {
+    "id": "JP-0030",
+    "name": "Piriton",
+    "generic_name": "Chlorphenamine Maleate",
+    "brand": {
+      "id": "JBR-PIRITON",
+      "name": "Piriton"
+    },
+    "form": "tablet",
+    "strength": "4mg",
+    "pack_size": "30 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "150.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-COUGHCOLD"
+    ],
+    "condition_ids": [
+      "JH-ALLERGY"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-03T08:00:00Z"
+  },
+  {
+    "id": "JP-0031",
+    "name": "Cetirizine",
+    "generic_name": "Cetirizine Hydrochloride",
+    "brand": null,
+    "form": "tablet",
+    "strength": "10mg",
+    "pack_size": "10 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "120.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-COUGHCOLD"
+    ],
+    "condition_ids": [
+      "JH-ALLERGY"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-04T08:00:00Z"
+  },
+  {
+    "id": "JP-0032",
+    "name": "Ventolin Inhaler",
+    "generic_name": "Salbutamol",
+    "brand": {
+      "id": "JBR-VENTOLIN",
+      "name": "Ventolin"
+    },
+    "form": "inhaler",
+    "strength": "100mcg",
+    "pack_size": "200 doses",
+    "unit_of_sale": "box",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "1150.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-RESPIRATORY"
+    ],
+    "condition_ids": [
+      "JH-ASTHMA"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-05T08:00:00Z"
+  },
+  {
+    "id": "JP-0033",
+    "name": "Calpol Paediatric Suspension",
+    "generic_name": "Paracetamol",
+    "brand": {
+      "id": "JBR-CALPOL",
+      "name": "Calpol"
+    },
+    "form": "oral suspension",
+    "strength": "120mg/5ml",
+    "pack_size": "100ml",
+    "unit_of_sale": "bottle",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "380.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-MUMANDBABY"
+    ],
+    "condition_ids": [
+      "JH-FEVER",
+      "JH-PAIN"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-06T08:00:00Z"
+  },
+  {
+    "id": "JP-0034",
+    "name": "Pampers Baby Dry",
+    "generic_name": null,
+    "brand": {
+      "id": "JBR-PAMPERS",
+      "name": "Pampers"
+    },
+    "form": "nappy",
+    "strength": null,
+    "pack_size": "46 nappies",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "1450.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "1700.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-MUMANDBABY"
+    ],
+    "condition_ids": [],
+    "is_active": true,
+    "updated_at": "2026-09-07T08:00:00Z"
+  },
+  {
+    "id": "JP-0035",
+    "name": "Infacol Colic Drops",
+    "generic_name": "Simeticone",
+    "brand": {
+      "id": "JBR-INFACOL",
+      "name": "Infacol"
+    },
+    "form": "oral suspension",
+    "strength": "40mg/ml",
+    "pack_size": "50ml",
+    "unit_of_sale": "bottle",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "620.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-MUMANDBABY"
+    ],
+    "condition_ids": [],
+    "is_active": true,
+    "updated_at": "2026-09-08T08:00:00Z"
+  },
+  {
+    "id": "JP-0036",
+    "name": "Folic Acid",
+    "generic_name": "Folic Acid",
+    "brand": null,
+    "form": "tablet",
+    "strength": "5mg",
+    "pack_size": "30 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "90.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-MUMANDBABY"
+    ],
+    "condition_ids": [
+      "JH-PREGNANCY"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-09T08:00:00Z"
+  },
+  {
+    "id": "JP-0037",
+    "name": "Pregnancy Test Kit",
+    "generic_name": null,
+    "brand": null,
+    "form": "device",
+    "strength": null,
+    "pack_size": "1 test",
+    "unit_of_sale": "box",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "150.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0.16,
+    "image_url": null,
+    "category_ids": [
+      "JC-DEVICES"
+    ],
+    "condition_ids": [
+      "JH-PREGNANCY"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-10T08:00:00Z"
+  },
+  {
+    "id": "JP-0038",
+    "name": "Redoxon Vitamin C",
+    "generic_name": "Ascorbic Acid",
+    "brand": {
+      "id": "JBR-REDOXON",
+      "name": "Redoxon"
+    },
+    "form": "effervescent tablet",
+    "strength": "1000mg",
+    "pack_size": "10 tablets",
+    "unit_of_sale": "tube",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "550.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "650.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-SUPPLEMENTS"
+    ],
+    "condition_ids": [
+      "JH-IMMUNITY"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-11T08:00:00Z"
+  },
+  {
+    "id": "JP-0039",
+    "name": "Centrum Multivitamin",
+    "generic_name": null,
+    "brand": {
+      "id": "JBR-CENTRUM",
+      "name": "Centrum"
+    },
+    "form": "tablet",
+    "strength": null,
+    "pack_size": "30 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "1250.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-SUPPLEMENTS"
+    ],
+    "condition_ids": [
+      "JH-IMMUNITY"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-12T08:00:00Z"
+  },
+  {
+    "id": "JP-0040",
+    "name": "Ferrous Sulphate",
+    "generic_name": "Ferrous Sulphate",
+    "brand": null,
+    "form": "tablet",
+    "strength": "200mg",
+    "pack_size": "30 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "140.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-SUPPLEMENTS"
+    ],
+    "condition_ids": [
+      "JH-ANAEMIA"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-13T08:00:00Z"
+  },
+  {
+    "id": "JP-0041",
+    "name": "Calcium plus Vitamin D3",
+    "generic_name": "Calcium Carbonate",
+    "brand": null,
+    "form": "tablet",
+    "strength": "600mg",
+    "pack_size": "30 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "480.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-SUPPLEMENTS"
+    ],
+    "condition_ids": [],
+    "is_active": true,
+    "updated_at": "2026-09-14T08:00:00Z"
+  },
+  {
+    "id": "JP-0042",
+    "name": "Omega 3 Fish Oil",
+    "generic_name": null,
+    "brand": null,
+    "form": "capsule",
+    "strength": "1000mg",
+    "pack_size": "60 capsules",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "1350.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "1600.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-SUPPLEMENTS"
+    ],
+    "condition_ids": [],
+    "is_active": true,
+    "updated_at": "2026-09-15T08:00:00Z"
+  },
+  {
+    "id": "JP-0043",
+    "name": "Zinc Sulphate",
+    "generic_name": "Zinc Sulphate",
+    "brand": null,
+    "form": "tablet",
+    "strength": "20mg",
+    "pack_size": "10 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "80.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-SUPPLEMENTS"
+    ],
+    "condition_ids": [
+      "JH-IMMUNITY"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-16T08:00:00Z"
+  },
+  {
+    "id": "JP-0044",
+    "name": "Eno Fruit Salts",
+    "generic_name": "Sodium Bicarbonate",
+    "brand": {
+      "id": "JBR-ENO",
+      "name": "Eno"
+    },
+    "form": "powder",
+    "strength": null,
+    "pack_size": "5 sachets",
+    "unit_of_sale": "sachet",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "100.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-DIGESTIVE"
+    ],
+    "condition_ids": [
+      "JH-INDIGESTION"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-17T08:00:00Z"
+  },
+  {
+    "id": "JP-0045",
+    "name": "Omeprazole",
+    "generic_name": "Omeprazole",
+    "brand": null,
+    "form": "capsule",
+    "strength": "20mg",
+    "pack_size": "14 capsules",
+    "unit_of_sale": "pack",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "320.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-DIGESTIVE"
+    ],
+    "condition_ids": [
+      "JH-INDIGESTION"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-18T08:00:00Z"
+  },
+  {
+    "id": "JP-0046",
+    "name": "Buscopan",
+    "generic_name": "Hyoscine Butylbromide",
+    "brand": {
+      "id": "JBR-BUSCOPAN",
+      "name": "Buscopan"
+    },
+    "form": "tablet",
+    "strength": "10mg",
+    "pack_size": "20 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "410.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-DIGESTIVE"
+    ],
+    "condition_ids": [
+      "JH-PAIN"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-19T08:00:00Z"
+  },
+  {
+    "id": "JP-0047",
+    "name": "ORS Rehydration Sachets",
+    "generic_name": "Oral Rehydration Salts",
+    "brand": null,
+    "form": "powder",
+    "strength": null,
+    "pack_size": "10 sachets",
+    "unit_of_sale": "sachet",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "120.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-DIGESTIVE"
+    ],
+    "condition_ids": [],
+    "is_active": true,
+    "updated_at": "2026-09-20T08:00:00Z"
+  },
+  {
+    "id": "JP-0048",
+    "name": "Imodium",
+    "generic_name": "Loperamide",
+    "brand": {
+      "id": "JBR-IMODIUM",
+      "name": "Imodium"
+    },
+    "form": "capsule",
+    "strength": "2mg",
+    "pack_size": "12 capsules",
+    "unit_of_sale": "pack",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "390.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-DIGESTIVE"
+    ],
+    "condition_ids": [],
+    "is_active": true,
+    "updated_at": "2026-09-21T08:00:00Z"
+  },
+  {
+    "id": "JP-0049",
+    "name": "Betnovate Cream",
+    "generic_name": "Betamethasone Valerate",
+    "brand": {
+      "id": "JBR-BETNOVATE",
+      "name": "Betnovate"
+    },
+    "form": "cream",
+    "strength": "0.1%",
+    "pack_size": "30g",
+    "unit_of_sale": "tube",
+    "dispensing_class": "POM",
+    "price": {
+      "amount": "450.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-SKINCARE"
+    ],
+    "condition_ids": [
+      "JH-SKIN"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-22T08:00:00Z"
+  },
+  {
+    "id": "JP-0050",
+    "name": "Canesten Cream",
+    "generic_name": "Clotrimazole",
+    "brand": {
+      "id": "JBR-CANESTEN",
+      "name": "Canesten"
+    },
+    "form": "cream",
+    "strength": "1%",
+    "pack_size": "20g",
+    "unit_of_sale": "tube",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "620.00",
+      "currency": "KES"
+    },
+    "compare_at_price": {
+      "amount": "750.00",
+      "currency": "KES"
+    },
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-SKINCARE"
+    ],
+    "condition_ids": [
+      "JH-SKIN"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-23T08:00:00Z"
+  },
+  {
+    "id": "JP-0051",
+    "name": "Nivea Body Lotion",
+    "generic_name": null,
+    "brand": {
+      "id": "JBR-NIVEA",
+      "name": "Nivea"
+    },
+    "form": "lotion",
+    "strength": null,
+    "pack_size": "400ml",
+    "unit_of_sale": "bottle",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "680.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0.16,
+    "image_url": null,
+    "category_ids": [
+      "JC-PERSONALCARE"
+    ],
+    "condition_ids": [],
+    "is_active": true,
+    "updated_at": "2026-09-24T08:00:00Z"
+  },
+  {
+    "id": "JP-0052",
+    "name": "Dettol Antiseptic Liquid",
+    "generic_name": "Chloroxylenol",
+    "brand": {
+      "id": "JBR-DETTOL",
+      "name": "Dettol"
+    },
+    "form": "liquid",
+    "strength": "4.8%",
+    "pack_size": "250ml",
+    "unit_of_sale": "bottle",
+    "dispensing_class": "OTC",
+    "price": {
+      "amount": "420.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0.16,
+    "image_url": null,
+    "category_ids": [
+      "JC-PERSONALCARE"
+    ],
+    "condition_ids": [],
+    "is_active": true,
+    "updated_at": "2026-09-25T08:00:00Z"
+  },
+  {
+    "id": "JP-0053",
+    "name": "Diazepam",
+    "generic_name": "Diazepam",
+    "brand": null,
+    "form": "tablet",
+    "strength": "5mg",
+    "pack_size": "10 tablets",
+    "unit_of_sale": "pack",
+    "dispensing_class": "controlled",
+    "price": {
+      "amount": "310.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-CNS"
+    ],
+    "condition_ids": [
+      "JH-ANXIETY"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-26T08:00:00Z"
+  },
+  {
+    "id": "JP-0054",
+    "name": "Tramadol",
+    "generic_name": "Tramadol Hydrochloride",
+    "brand": null,
+    "form": "capsule",
+    "strength": "50mg",
+    "pack_size": "20 capsules",
+    "unit_of_sale": "pack",
+    "dispensing_class": "controlled",
+    "price": {
+      "amount": "480.00",
+      "currency": "KES"
+    },
+    "compare_at_price": null,
+    "vat_rate": 0,
+    "image_url": null,
+    "category_ids": [
+      "JC-CNS"
+    ],
+    "condition_ids": [
+      "JH-PAIN"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-27T08:00:00Z"
   }
 ]
