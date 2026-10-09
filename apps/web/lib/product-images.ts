@@ -1,5 +1,5 @@
 import { existsSync, readdirSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
 /**
  * Real product photography, resolved from the filesystem.
@@ -17,7 +17,12 @@ import { fileURLToPath } from 'node:url';
  * dev, which is the normal trade for not hitting the filesystem per render.
  */
 
-const PRODUCTS_DIR = fileURLToPath(new URL('../public/products', import.meta.url));
+/*
+ * process.cwd(), not new URL(..., import.meta.url): webpack treats a relative
+ * specifier inside new URL() as a module to resolve at build time, which fails
+ * with "Module not found". Next runs the app with cwd set to the app directory.
+ */
+const PRODUCTS_DIR = path.join(process.cwd(), 'public', 'products');
 const EXTENSIONS = ['.webp', '.jpg', '.jpeg', '.png', '.avif'];
 
 function buildIndex(): Map<string, string> {
