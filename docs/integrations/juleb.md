@@ -119,6 +119,10 @@ Send these to Juleb as a single list when opening the integration conversation.
     malaria)? "Shop by condition" is how patients navigate and it is a separate
     taxonomy from categories.
 7d. Is **brand** a first-class entity with a stable id, or only a text field?
+7e. Does Juleb host **product images**, and if so on which domain? Every product
+    currently returns a null image_url. We need the host to add it to Next.js
+    remotePatterns; until then the storefront draws its own dosage-form
+    illustrations rather than borrowing copyrighted packaging photography.
 
 **Orders**
 8. How do we create an order, and is creation idempotent? If so, how is the idempotency key

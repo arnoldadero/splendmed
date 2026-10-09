@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { formatMoney, type Availability } from '@splendmed/domain';
 
+import { ProductImage } from '@/components/product-image';
 import type { CatalogItem } from '@/lib/catalog';
 
 /**
@@ -48,12 +49,8 @@ export function ProductCard({ item }: { item: CatalogItem }) {
         </span>
       )}
 
-      <div className="mb-3 flex aspect-square items-center justify-center rounded-lg bg-secondary">
-        {/* Juleb returns no images for the fixture catalog. A neutral placeholder
-            is honest; a stock photo of a different medicine would not be. */}
-        <span aria-hidden="true" className="text-3xl font-bold text-brand-mint">
-          {product.name.charAt(0)}
-        </span>
+      <div className="mb-3 flex aspect-square items-center justify-center rounded-lg bg-secondary p-5 text-brand-teal">
+        <ProductImage product={product} className="h-full w-full" />
       </div>
 
       <h3 className="font-semibold leading-snug">

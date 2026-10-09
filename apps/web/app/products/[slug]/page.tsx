@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { formatMoney } from '@splendmed/domain';
 
+import { ProductImage } from '@/components/product-image';
 import { getProductBySlug } from '@/lib/catalog';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -23,10 +24,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="flex aspect-square items-center justify-center rounded-xl bg-secondary">
-          <span aria-hidden="true" className="text-7xl font-bold text-brand-mint">
-            {product.name.charAt(0)}
-          </span>
+        <div className="flex aspect-square items-center justify-center rounded-xl bg-secondary p-16 text-brand-teal">
+          <ProductImage product={product} className="h-full w-full" />
         </div>
 
         <div>
