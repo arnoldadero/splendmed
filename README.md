@@ -1,0 +1,97 @@
+# SplendMed
+
+Digital pharmacy platform for **SplendMed Pharmacy**, Kisumu, Kenya — a customer-facing
+ordering experience plus an internal pharmacist console for verifying prescriptions.
+
+[Juleb](https://juleb.com/) is the system of record: it runs the ERP, POS, inventory, and
+accounting. This repository is the digital patient experience layer on top of it.
+
+The full specification lives in **[prompts/BUILD_SPLENDMED.md](prompts/BUILD_SPLENDMED.md)**.
+Section references like §3.1 throughout the codebase point there.
+
+## Status
+
+| Phase | Scope | State |
+|---|---|---|
+| 0 | Foundation — monorepo, brand system, Supabase plumbing, CI guardrails | **done** |
+| 1 | Auth, roles, RLS spine | next |
+| 2 | Juleb port + mock driver | pending |
+| 3 | Catalog | pending |
+| 4 | Cart, prescription upload, checkout | pending |
+| 5 | Payments (M-Pesa) | pending |
+| 6 | Pharmacist Rx console | pending |
+| 7 | Order push + admin | pending |
+| 8 | Hardening | pending |
+
+## Requirements
+
+- Node >= 20.11 (developed on 22)
+- pnpm 9.15
+- Docker, for the local Supabase stack
+
+## Setup
+
+```bash
+pnpm install
+```
+
+Copy the env template, start the local Supabase stack, and paste the printed anon key into
+apps/web/.env.local:
+
+```bash
+pnpm db:start
+```
+
+Then run the app:
+
+```bash
+pnpm dev
+```
+
+## Verification
+
+The Phase 0 acceptance gate. Run before every commit:
+
+```bash
+pnpm verify
+```
+
+That chain is typecheck, then lint, then test, then guard. The guard step is not optional
+tidiness; it is the mechanical enforcement of two non-negotiable guardrails:
+
+- **scripts/guard-secrets.sh** (§3.4) — fails if a secret is exposed through a NEXT_PUBLIC_
+  variable, read outside a server-only module, referenced from a client component, or
+  committed as a literal.
+- **scripts/guard-juleb.sh** (§3.1) — fails if any hardcoded Juleb hostname, invented
+  endpoint path, or inline Juleb network call appears in source.
+- **scripts/test-guards.sh** — proves both guards still fire, using deliberate violation
+  fixtures plus clean-file negative controls. A guard that never fires is theatre.
+
+## Juleb integration
+
+**Juleb publishes no public API documentation.** Endpoints, auth, and payloads are available
+only under a partner agreement, and we do not have them yet. Nothing in the roadmap blocks on
+this: all Juleb access goes through a port interface with a fixture-backed mock driver, and
+the HTTP driver throws JulebSpecUnavailableError rather than guessing a request.
+
+Read **[docs/integrations/juleb.md](docs/integrations/juleb.md)** before touching anything
+Juleb-related. It records what we know, what we do not, the swap-in checklist, and the open
+questions to put to Juleb.
+
+## Brand
+
+The palette, typeface, and logo rules come from the brand guideline and are encoded in
+apps/web/lib/brand.ts and apps/web/app/globals.css. The guideline forbids recolouring or
+distorting the logo, so every usage goes through the Logo component — a raw img tag on a
+logo file is a review failure.
+
+## Layout
+
+```
+apps/web/          Next.js 15 app (App Router, RSC, Tailwind v4)
+packages/          juleb port + drivers, payments, shared domain  (from Phase 2)
+supabase/          migrations, Edge Functions, seed
+docs/              integrations, compliance, ADRs
+scripts/           CI guardrails and their regression test
+prompts/           the build specification
+```

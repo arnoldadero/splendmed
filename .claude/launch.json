@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "splendmed-web",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@splendmed/web", "dev"],
+      "port": 3000
+    }
+  ]
+}

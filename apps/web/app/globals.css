@@ -1,0 +1,115 @@
+@import 'tailwindcss';
+
+/*
+ * SplendMed brand system.
+ * Palette values are taken verbatim from "SplendMed pharmacy.pdf" (brand guideline,
+ * Teilyn Media, Dec 2024) and must not be altered — the guideline's logo-misuse page
+ * explicitly forbids recolouring. See BUILD_SPLENDMED.md §6.
+ */
+/*
+ * `static` is required, not stylistic. Tailwind v4 tree-shakes theme values that no
+ * utility class references, which silently dropped --color-brand-lime from the bundle
+ * (it is a sparing accent per the guideline, so nothing used it yet). Brand colours are
+ * contract values: any of the five must resolve for hand-written `var(--color-brand-*)`
+ * even when no utility happens to use it.
+ */
+@theme static {
+  /* Raw brand palette — the only five colours the brand owns. */
+  --color-brand-teal: #01b1af;
+  --color-brand-deep: #0b5c58;
+  --color-brand-lime: #c1d72d;
+  --color-brand-mint: #8bd0bb;
+  --color-brand-white: #ffffff;
+
+  /* Tints/shades derived from the palette for surfaces and hover states.
+     Derivation is allowed; substituting a different hue is not. */
+  --color-brand-teal-600: #019b99;
+  --color-brand-teal-50: #e6f8f8;
+  --color-brand-mint-50: #f1faf6;
+  --color-brand-deep-900: #073d3a;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+}
+
+/*
+ * Semantic tokens. shadcn/ui reads these names, so installing shadcn components
+ * later picks up SplendMed colours instead of the default slate (§4).
+ */
+:root {
+  --background: var(--color-brand-white);
+  --foreground: var(--color-brand-deep);
+  --card: var(--color-brand-white);
+  --card-foreground: var(--color-brand-deep);
+  --primary: var(--color-brand-teal);
+  --primary-foreground: var(--color-brand-white);
+  --secondary: var(--color-brand-mint-50);
+  --secondary-foreground: var(--color-brand-deep);
+  --muted: var(--color-brand-mint-50);
+  --muted-foreground: #4a6e6a;
+  --accent: var(--color-brand-mint);
+  --accent-foreground: var(--color-brand-deep);
+  --destructive: #b42318;
+  --destructive-foreground: var(--color-brand-white);
+  --border: #d9e8e4;
+  --input: #d9e8e4;
+  --ring: var(--color-brand-teal);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--color-brand-deep-900);
+    --foreground: #eaf6f4;
+    --card: var(--color-brand-deep);
+    --card-foreground: #eaf6f4;
+    --primary: var(--color-brand-teal);
+    --primary-foreground: var(--color-brand-deep-900);
+    --secondary: #0f4b48;
+    --secondary-foreground: #eaf6f4;
+    --muted: #0f4b48;
+    --muted-foreground: #9dc4bf;
+    --accent: var(--color-brand-mint);
+    --accent-foreground: var(--color-brand-deep-900);
+    --border: #14544f;
+    --input: #14544f;
+    --ring: var(--color-brand-mint);
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* §12: visible focus is a WCAG 2.2 AA requirement, not a preference. */
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+}

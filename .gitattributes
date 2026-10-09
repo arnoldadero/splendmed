@@ -1,0 +1,9 @@
+# Normalise line endings so a Windows checkout does not produce CRLF diffs.
+* text=auto eol=lf
+
+# Shell scripts must keep LF or bash on Linux CI fails on the shebang.
+*.sh text eol=lf
+
+# Binary assets
+*.png binary
+*.pdf binary
