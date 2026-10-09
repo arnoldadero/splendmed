@@ -29,11 +29,18 @@ export default function HomePage() {
         </nav>
       </header>
 
-      <section className="mx-auto max-w-6xl px-10 py-20 sm:py-28">
+      {/* Named so it does not surface as an unlabelled region landmark (§12). */}
+      <section
+        className="mx-auto max-w-6xl px-10 py-20 sm:py-28"
+        aria-labelledby="hero-heading"
+      >
         <p className="text-sm font-semibold uppercase tracking-widest text-brand-teal">
           Pharmacy &amp; wellness
         </p>
-        <h1 className="mt-4 max-w-3xl text-4xl font-bold leading-tight text-balance sm:text-6xl">
+        <h1
+          id="hero-heading"
+          className="mt-4 max-w-3xl text-4xl font-bold leading-tight text-balance sm:text-6xl"
+        >
           Trusted medication, and care that looks after the whole person.
         </h1>
         <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
