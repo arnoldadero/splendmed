@@ -6,6 +6,8 @@ import {
 } from '@splendmed/domain';
 import { getJulebClient } from '@splendmed/juleb';
 
+import { localImageFor } from '@/lib/product-images';
+
 /**
  * Server-side catalog access.
  *
@@ -98,7 +100,13 @@ export async function getCatalog(): Promise<readonly CatalogItem[]> {
   return products.map((product) => {
     const level = product.julebProductId ? byProduct.get(product.julebProductId) : undefined;
     return {
-      product,
+      // Juleb's own image wins; otherwise fall back to photography supplied in
+      // public/products/. ProductImage draws the dosage form if neither exists.
+      product: {
+        ...product,
+        imageUrl:
+          product.imageUrl ?? localImageFor([product.julebProductId, product.slug]),
+      },
       // No stock row means we have no information, which is not the same as
       // "in stock". Treat the unknown case as unavailable rather than promising
       // something we cannot fulfil (§3.7).
