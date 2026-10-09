@@ -1,7 +1,13 @@
 import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 3100;
-const baseURL = `http://127.0.0.1:${PORT}`;
+/*
+ * E2E_BASE_URL points the suite at an already-running site — the production
+ * deployment, say — instead of building one. Smoke-testing what actually
+ * shipped is worth more than testing a build that only ever ran locally.
+ */
+const externalTarget = process.env.E2E_BASE_URL;
+const baseURL = externalTarget ?? `http://127.0.0.1:${PORT}`;
 
 /*
  * Artifacts are off by default. Video and trace are large, and this machine is
@@ -32,7 +38,8 @@ export default defineConfig({
    * open on 3000. Runs the production build: that is what deploys, and it is the
    * build that caught the public/products resolution bug.
    */
-  webServer: {
+  // No local server when targeting an external URL.
+  ...(externalTarget ? {} : { webServer: {
     command: `pnpm build && pnpm start --port ${PORT}`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
@@ -42,5 +49,5 @@ export default defineConfig({
       NEXT_PUBLIC_SUPABASE_ANON_KEY: 'e2e-placeholder-anon-key',
       JULEB_DRIVER: 'mock',
     },
-  },
+  } }),
 });
