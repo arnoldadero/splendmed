@@ -1,0 +1,26 @@
+[
+  {
+    "id": "JB-KSM-001",
+    "name": "SplendMed Pharmacy — Kisumu CBD",
+    "county": "Kisumu",
+    "ppb_licence_no": "PPB/RP/2024/00000",
+    "pharmacist_in_charge": "PLACEHOLDER — real name required before launch",
+    "is_active": true
+  },
+  {
+    "id": "JB-KSM-002",
+    "name": "SplendMed Pharmacy — Mega City",
+    "county": "Kisumu",
+    "ppb_licence_no": "PPB/RP/2024/00000",
+    "pharmacist_in_charge": "PLACEHOLDER — real name required before launch",
+    "is_active": true
+  },
+  {
+    "id": "JB-KSM-003",
+    "name": "SplendMed Pharmacy — Kondele (closed)",
+    "county": "Kisumu",
+    "ppb_licence_no": null,
+    "pharmacist_in_charge": null,
+    "is_active": false
+  }
+]

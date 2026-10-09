@@ -1,0 +1,101 @@
+[
+  {
+    "id": "JP-0001", "name": "Panadol Extra", "generic_name": "Paracetamol + Caffeine",
+    "brand": { "id": "JBR-GSK", "name": "Panadol" },
+    "form": "tablet", "strength": "500mg/65mg", "pack_size": "24 tablets",
+    "unit_of_sale": "pack", "dispensing_class": "OTC",
+    "price": { "amount": "450.00", "currency": "KES" },
+    "compare_at_price": { "amount": "600.00", "currency": "KES" },
+    "vat_rate": 0, "image_url": null,
+    "category_ids": ["JC-PAINRELIEF"], "condition_ids": ["JH-PAIN", "JH-FEVER"],
+    "is_active": true, "updated_at": "2026-10-01T08:00:00Z"
+  },
+  {
+    "id": "JP-0002", "name": "Coartem", "generic_name": "Artemether + Lumefantrine",
+    "brand": { "id": "JBR-NOVARTIS", "name": "Coartem" },
+    "form": "tablet", "strength": "20mg/120mg", "pack_size": "24 tablets",
+    "unit_of_sale": "pack", "dispensing_class": "POM",
+    "price": { "amount": "1250.00", "currency": "KES" },
+    "compare_at_price": null,
+    "vat_rate": 0, "image_url": null,
+    "category_ids": ["JC-ANTIMALARIAL"], "condition_ids": ["JH-MALARIA"],
+    "is_active": true, "updated_at": "2026-10-02T08:00:00Z"
+  },
+  {
+    "id": "JP-0003", "name": "Glucophage", "generic_name": "Metformin Hydrochloride",
+    "brand": { "id": "JBR-MERCK", "name": "Glucophage" },
+    "form": "tablet", "strength": "500mg", "pack_size": "60 tablets",
+    "unit_of_sale": "pack", "dispensing_class": "prescription_only",
+    "price": { "amount": "890.50", "currency": "KES" },
+    "compare_at_price": { "amount": "1100.00", "currency": "KES" },
+    "vat_rate": 0, "image_url": null,
+    "category_ids": ["JC-ENDOCRINE"], "condition_ids": ["JH-DIABETES"],
+    "is_active": true, "updated_at": "2026-10-03T08:00:00Z"
+  },
+  {
+    "id": "JP-0004", "name": "Losartan Potassium", "generic_name": "Losartan Potassium",
+    "brand": null,
+    "form": "tablet", "strength": "50mg", "pack_size": "30 tablets",
+    "unit_of_sale": "pack", "dispensing_class": "rx",
+    "price": { "amount": "720.00", "currency": "KES" },
+    "compare_at_price": null,
+    "vat_rate": 0, "image_url": null,
+    "category_ids": ["JC-CARDIOVASCULAR"], "condition_ids": ["JH-HYPERTENSION"],
+    "is_active": true, "updated_at": "2026-10-03T09:00:00Z"
+  },
+  {
+    "id": "JP-0005", "name": "Diazepam", "generic_name": "Diazepam",
+    "brand": null,
+    "form": "tablet", "strength": "5mg", "pack_size": "10 tablets",
+    "unit_of_sale": "pack", "dispensing_class": "controlled",
+    "price": { "amount": "310.00", "currency": "KES" },
+    "compare_at_price": null,
+    "vat_rate": 0, "image_url": null,
+    "category_ids": ["JC-CNS"], "condition_ids": ["JH-ANXIETY"],
+    "is_active": true, "updated_at": "2026-10-04T08:00:00Z"
+  },
+  {
+    "id": "JP-0006", "name": "Vitamin C 1000mg Effervescent", "generic_name": "Ascorbic Acid",
+    "brand": { "id": "JBR-REDOXON", "name": "Redoxon" },
+    "form": "effervescent tablet", "strength": "1000mg", "pack_size": "10 tablets",
+    "unit_of_sale": "tube", "dispensing_class": "otc",
+    "price": { "amount": "550.00", "currency": "KES" },
+    "compare_at_price": { "amount": "650.00", "currency": "KES" },
+    "vat_rate": 0.16, "image_url": null,
+    "category_ids": ["JC-SUPPLEMENTS"], "condition_ids": ["JH-IMMUNITY"],
+    "is_active": true, "updated_at": "2026-10-05T08:00:00Z"
+  },
+  {
+    "id": "JP-0007", "name": "Calpol Paediatric Suspension", "generic_name": "Paracetamol",
+    "brand": { "id": "JBR-CALPOL", "name": "Calpol" },
+    "form": "oral suspension", "strength": "120mg/5ml", "pack_size": "100ml",
+    "unit_of_sale": "bottle", "dispensing_class": "OTC",
+    "price": { "amount": "380.00", "currency": "KES" },
+    "compare_at_price": null,
+    "vat_rate": 0, "image_url": null,
+    "category_ids": ["JC-MUMANDBABY"], "condition_ids": ["JH-FEVER", "JH-PAIN"],
+    "is_active": true, "updated_at": "2026-10-06T08:00:00Z"
+  },
+  {
+    "id": "JP-0008", "name": "Accu-Chek Active Glucometer Kit", "generic_name": null,
+    "brand": { "id": "JBR-ROCHE", "name": "Accu-Chek" },
+    "form": "device", "strength": null, "pack_size": "1 kit",
+    "unit_of_sale": "box", "dispensing_class": "otc",
+    "price": { "amount": "3450.00", "currency": "KES" },
+    "compare_at_price": { "amount": "4200.00", "currency": "KES" },
+    "vat_rate": 0.16, "image_url": null,
+    "category_ids": ["JC-DEVICES"], "condition_ids": ["JH-DIABETES"],
+    "is_active": true, "updated_at": "2026-10-07T08:00:00Z"
+  },
+  {
+    "id": "JP-0009", "name": "Discontinued Cough Syrup", "generic_name": "Dextromethorphan",
+    "brand": null,
+    "form": "syrup", "strength": "15mg/5ml", "pack_size": "100ml",
+    "unit_of_sale": "bottle", "dispensing_class": "otc",
+    "price": { "amount": "290.00", "currency": "KES" },
+    "compare_at_price": null,
+    "vat_rate": 0, "image_url": null,
+    "category_ids": ["JC-COUGHCOLD"], "condition_ids": ["JH-COUGH"],
+    "is_active": false, "updated_at": "2026-10-08T08:00:00Z"
+  }
+]

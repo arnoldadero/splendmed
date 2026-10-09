@@ -1,0 +1,13 @@
+[
+  { "branch_id": "JB-KSM-001", "product_id": "JP-0001", "quantity_available": 120, "as_of": "2026-10-09T06:00:00Z" },
+  { "branch_id": "JB-KSM-001", "product_id": "JP-0002", "quantity_available": 18, "as_of": "2026-10-09T06:00:00Z" },
+  { "branch_id": "JB-KSM-001", "product_id": "JP-0003", "quantity_available": 4, "as_of": "2026-10-09T06:00:00Z" },
+  { "branch_id": "JB-KSM-001", "product_id": "JP-0004", "quantity_available": 0, "as_of": "2026-10-09T06:00:00Z" },
+  { "branch_id": "JB-KSM-001", "product_id": "JP-0005", "quantity_available": 2, "as_of": "2026-10-09T06:00:00Z" },
+  { "branch_id": "JB-KSM-001", "product_id": "JP-0006", "quantity_available": 65, "as_of": "2026-10-09T06:00:00Z" },
+  { "branch_id": "JB-KSM-001", "product_id": "JP-0007", "quantity_available": 31, "as_of": "2026-10-09T06:00:00Z" },
+  { "branch_id": "JB-KSM-001", "product_id": "JP-0008", "quantity_available": 7, "as_of": "2026-10-09T06:00:00Z" },
+  { "branch_id": "JB-KSM-002", "product_id": "JP-0001", "quantity_available": 44, "as_of": "2026-10-09T06:00:00Z" },
+  { "branch_id": "JB-KSM-002", "product_id": "JP-0002", "quantity_available": 0, "as_of": "2026-10-09T06:00:00Z" },
+  { "branch_id": "JB-KSM-002", "product_id": "JP-0003", "quantity_available": 52, "as_of": "2026-10-09T06:00:00Z" }
+]

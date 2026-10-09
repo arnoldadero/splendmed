@@ -111,6 +111,14 @@ Send these to Juleb as a single list when opening the integration conversation.
 6. How is stock exposed per branch, and what is the acceptable polling frequency?
 7. Are prices and VAT/tax rates returned per product, and in which currency for a Kenyan
    tenant?
+7a. Is a **unit of sale** exposed per product (pieces, packets, bottles, tube)? The
+    storefront shows it as a price suffix and it prevents real confusion.
+7b. Is there a **compare-at / was-price** so we can render a struck-through original
+    and derive a discount badge, or is promotional pricing modelled some other way?
+7c. Are products tagged against **health conditions** (diabetes, hypertension,
+    malaria)? "Shop by condition" is how patients navigate and it is a separate
+    taxonomy from categories.
+7d. Is **brand** a first-class entity with a stable id, or only a text field?
 
 **Orders**
 8. How do we create an order, and is creation idempotent? If so, how is the idempotency key

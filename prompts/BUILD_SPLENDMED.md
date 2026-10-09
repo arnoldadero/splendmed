@@ -453,6 +453,12 @@ Supported for non-prescription orders at launch; settle on delivery confirmation
 
 ### 10.1 Customer web app
 
+The storefront targets the patterns in **docs/product/ux-reference-mydawa.md** — MyDawa
+is the Kenyan market leader and the closest comparable, so a shopper arriving from it
+should find SplendMed familiar. Read that document before building Phase 3. It also
+records what must NOT be copied (their brand, copy, and unsubstantiated trust claims)
+and four schema fields the §7 sketch omits.
+
 - **Home** — brand-led, wellness-forward. Search, categories, "speak to a pharmacist" entry point.
 - **Catalog & search** — Postgres full-text search across brand and generic names (patients search
   both ways: "Panadol" and "paracetamol"). Filter by category, availability, Rx-required.
