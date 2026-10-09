@@ -39,3 +39,9 @@ pnpm-debug.log*
 
 # Next.js generated type shim
 next-env.d.ts
+
+# Brand source PDFs: kept locally, never published.
+# They carry the design agency's personal contact details and a public repo is
+# permanent. The palette, fonts and logo rules they define are already encoded in
+# apps/web/lib/brand.ts, globals.css and docs/decisions/0002-logo-clear-space.md.
+*.pdf
