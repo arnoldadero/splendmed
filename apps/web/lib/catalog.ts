@@ -1,0 +1,191 @@
+import {
+  availabilityOf,
+  discountPercent,
+  type Availability,
+  type Product,
+} from '@splendmed/domain';
+import { getJulebClient } from '@splendmed/juleb';
+
+/**
+ * Server-side catalog access.
+ *
+ * Phase 3 interim: reads straight through the Juleb port so the storefront can be
+ * built and reviewed before the Postgres projection exists. The component layer
+ * takes domain types, so swapping this module to read `products` /
+ * `inventory_levels` changes nothing above it.
+ *
+ * Never import this from a client component — it resolves the Juleb driver, which
+ * reads server-only configuration.
+ */
+
+const DEFAULT_BRANCH = 'JB-KSM-001';
+
+/**
+ * Human labels for Juleb's taxonomy ids.
+ *
+ * Juleb returns category and condition ids but we have not been told whether it
+ * exposes display names for them (questions 7c and 5 in docs/integrations/juleb.md).
+ * Until then the labels live here rather than being derived from the id, because
+ * de-slugging "JC-MUMANDBABY" into something presentable is guesswork.
+ */
+const CATEGORY_LABELS: Record<string, string> = {
+  'JC-PAINRELIEF': 'Pain Relief',
+  'JC-ANTIMALARIAL': 'Malaria Treatment',
+  'JC-ENDOCRINE': 'Diabetes Care',
+  'JC-CARDIOVASCULAR': 'Heart and Blood Pressure',
+  'JC-CNS': 'Mental Health',
+  'JC-SUPPLEMENTS': 'Supplements and Nutrition',
+  'JC-MUMANDBABY': 'Mum and Baby',
+  'JC-DEVICES': 'Medical Devices',
+  'JC-COUGHCOLD': 'Cough and Cold',
+};
+
+const CONDITION_LABELS: Record<string, string> = {
+  'JH-PAIN': 'Pain',
+  'JH-FEVER': 'Fever',
+  'JH-MALARIA': 'Malaria',
+  'JH-DIABETES': 'Diabetes',
+  'JH-HYPERTENSION': 'Hypertension',
+  'JH-ANXIETY': 'Anxiety',
+  'JH-IMMUNITY': 'Immunity',
+  'JH-COUGH': 'Cough',
+};
+
+export interface Taxon {
+  readonly id: string;
+  readonly slug: string;
+  readonly label: string;
+  readonly productCount: number;
+}
+
+/** A product plus everything the card needs, resolved once on the server. */
+export interface CatalogItem {
+  readonly product: Product;
+  readonly availability: Availability;
+  readonly discount: number | null;
+}
+
+function slugForTaxon(id: string): string {
+  return id.replace(/^J[CH]-/, '').toLowerCase();
+}
+
+async function loadAllProducts(): Promise<readonly Product[]> {
+  const client = getJulebClient();
+  const collected: Product[] = [];
+  let cursor: string | null = null;
+
+  // Walk every page. The catalog is small today; once this reads the Postgres
+  // projection the pagination belongs in the query instead.
+  do {
+    const page = await client.listProducts(cursor ? { cursor, limit: 100 } : { limit: 100 });
+    collected.push(...page.products);
+    cursor = page.nextCursor;
+  } while (cursor);
+
+  return collected.filter((p) => p.isActive);
+}
+
+export async function getCatalog(): Promise<readonly CatalogItem[]> {
+  const products = await loadAllProducts();
+  const client = getJulebClient();
+
+  const stock = await client.getStock({
+    branchId: DEFAULT_BRANCH,
+    julebProductIds: products.flatMap((p) => (p.julebProductId ? [p.julebProductId] : [])),
+  });
+  const byProduct = new Map(stock.map((s) => [s.productId, s]));
+
+  return products.map((product) => {
+    const level = product.julebProductId ? byProduct.get(product.julebProductId) : undefined;
+    return {
+      product,
+      // No stock row means we have no information, which is not the same as
+      // "in stock". Treat the unknown case as unavailable rather than promising
+      // something we cannot fulfil (§3.7).
+      availability: level ? availabilityOf(level) : 'out_of_stock',
+      discount: discountPercent(product.price, product.compareAtPrice),
+    };
+  });
+}
+
+export async function getProductBySlug(slug: string): Promise<CatalogItem | undefined> {
+  const catalog = await getCatalog();
+  return catalog.find((item) => item.product.slug === slug);
+}
+
+function taxaFrom(
+  catalog: readonly CatalogItem[],
+  pick: (item: CatalogItem) => readonly string[],
+  labels: Record<string, string>,
+): readonly Taxon[] {
+  const counts = new Map<string, number>();
+  for (const item of catalog) {
+    for (const id of pick(item)) counts.set(id, (counts.get(id) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([id, productCount]) => ({
+      id,
+      slug: slugForTaxon(id),
+      label: labels[id] ?? id,
+      productCount,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+}
+
+export async function getCategories(): Promise<readonly Taxon[]> {
+  const catalog = await getCatalog();
+  return taxaFrom(catalog, (i) => i.product.categoryIds, CATEGORY_LABELS);
+}
+
+export async function getConditions(): Promise<readonly Taxon[]> {
+  const catalog = await getCatalog();
+  return taxaFrom(catalog, (i) => i.product.conditionIds, CONDITION_LABELS);
+}
+
+export async function getBrands(): Promise<readonly Taxon[]> {
+  const catalog = await getCatalog();
+  const counts = new Map<string, { label: string; count: number }>();
+  for (const { product } of catalog) {
+    if (!product.brand) continue;
+    const existing = counts.get(product.brand.slug);
+    counts.set(product.brand.slug, {
+      label: product.brand.name,
+      count: (existing?.count ?? 0) + 1,
+    });
+  }
+  return [...counts.entries()]
+    .map(([slug, v]) => ({ id: slug, slug, label: v.label, productCount: v.count }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+}
+
+export async function getByTaxon(
+  axis: 'category' | 'condition' | 'brand',
+  slug: string,
+): Promise<{ taxon: Taxon | undefined; items: readonly CatalogItem[] }> {
+  const catalog = await getCatalog();
+  const taxa =
+    axis === 'category'
+      ? await getCategories()
+      : axis === 'condition'
+        ? await getConditions()
+        : await getBrands();
+  const taxon = taxa.find((t) => t.slug === slug);
+  if (!taxon) return { taxon: undefined, items: [] };
+
+  const items = catalog.filter((item) =>
+    axis === 'brand'
+      ? item.product.brand?.slug === slug
+      : (axis === 'category' ? item.product.categoryIds : item.product.conditionIds).includes(
+          taxon.id,
+        ),
+  );
+  return { taxon, items };
+}
+
+/** Offers carousel: anything with a genuine discount, deepest first. */
+export async function getOffers(): Promise<readonly CatalogItem[]> {
+  const catalog = await getCatalog();
+  return catalog
+    .filter((i) => i.discount !== null)
+    .sort((a, b) => (b.discount ?? 0) - (a.discount ?? 0));
+}

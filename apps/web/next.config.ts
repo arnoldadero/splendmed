@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   typedRoutes: true,
+  // Workspace packages ship TypeScript source rather than a build step, so
+  // Next must transpile them.
+  transpilePackages: ['@splendmed/domain', '@splendmed/juleb'],
   /*
    * Pin file tracing to the monorepo root. Without this, Next walks up and finds
    * an unrelated package-lock.json in the user's home directory and treats that

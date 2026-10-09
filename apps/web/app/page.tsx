@@ -1,92 +1,107 @@
-import { Logo } from '@/components/logo';
-import { BRAND_VALUES } from '@/lib/brand';
+import Link from 'next/link';
 
-/*
- * Phase 0 landing page. Its job is to prove the brand system renders correctly
- * end to end — palette, Archivo, and the Logo component with enforced clear space.
- * The real storefront (catalog, search, cart) arrives in Phase 3; the catalog is a
- * projection of Juleb and cannot be built before the sync exists.
+import { ProductGrid } from '@/components/product-card';
+import { getCatalog, getConditions, getOffers } from '@/lib/catalog';
+
+/**
+ * Storefront homepage, composed per docs/product/ux-reference-mydawa.md: hero,
+ * primary service CTAs, offers, then condition-led entry points.
+ *
+ * Copy is written for SplendMed's voice (§6: warm, plain-spoken, competent) — the
+ * reference informs structure, not wording.
  */
+export default async function HomePage() {
+  const [offers, catalog, conditions] = await Promise.all([
+    getOffers(),
+    getCatalog(),
+    getConditions(),
+  ]);
 
-const VALUE_BLURBS: Record<(typeof BRAND_VALUES)[number], string> = {
-  Trust: 'Reliable quality in every product and every interaction.',
-  Professionalism: 'Expert care and high standards, consistently applied.',
-  Compassion: 'Health is a shared journey. We treat it that way.',
-  Wellness: 'Care that goes beyond medication to overall well-being.',
-  Innovation: 'Modern solutions that widen access to healthcare.',
-};
+  // "New" stands in for a recency sort until the catalog carries a created_at
+  // from Juleb. Labelled honestly as a selection, not as arrivals.
+  const featured = catalog.slice(0, 4);
 
-export default function HomePage() {
   return (
-    <main className="min-h-screen">
-      <header className="border-b border-border">
-        <nav
-          className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2"
-          aria-label="Primary"
-        >
-          <Logo variant="primary" height={36} priority />
-          <span className="text-sm font-medium text-muted-foreground">Kisumu, Kenya</span>
-        </nav>
-      </header>
+    <>
+      <section aria-labelledby="hero-heading" className="border-b border-border bg-secondary">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:py-20">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand-teal">
+            Pharmacy &amp; wellness · Kisumu
+          </p>
+          <h1
+            id="hero-heading"
+            className="mt-3 max-w-3xl text-4xl font-bold leading-tight text-balance sm:text-5xl"
+          >
+            Trusted medicine, and care that looks after the whole person.
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
+            Order what you need and have it checked by a licensed pharmacist before it leaves our
+            counter.
+          </p>
 
-      {/* Named so it does not surface as an unlabelled region landmark (§12). */}
-      <section
-        className="mx-auto max-w-6xl px-10 py-20 sm:py-28"
-        aria-labelledby="hero-heading"
-      >
-        <p className="text-sm font-semibold uppercase tracking-widest text-brand-teal">
-          Pharmacy &amp; wellness
-        </p>
-        <h1
-          id="hero-heading"
-          className="mt-4 max-w-3xl text-4xl font-bold leading-tight text-balance sm:text-6xl"
-        >
-          Trusted medication, and care that looks after the whole person.
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-          Founded in Kisumu with a simple mission: quality medication and exceptional care. Order
-          what you need, upload a prescription, and have it checked by a licensed pharmacist before
-          it ever leaves our counter.
-        </p>
-
-        <div className="mt-10 flex flex-wrap gap-3">
-          <span className="rounded-full bg-primary px-5 py-2.5 font-semibold text-primary-foreground">
-            Storefront arrives in Phase 3
-          </span>
-          <span className="rounded-full border border-border px-5 py-2.5 font-semibold">
-            Pharmacist review in Phase 6
-          </span>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/prescriptions/new"
+              className="rounded-lg bg-primary px-5 py-3 font-semibold text-primary-foreground"
+            >
+              Upload a prescription
+            </Link>
+            <Link
+              href="/pharmacist"
+              className="rounded-lg border border-brand-deep px-5 py-3 font-semibold"
+            >
+              Speak to a pharmacist
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section
-        className="border-t border-border bg-secondary"
-        aria-labelledby="values-heading"
-      >
-        <div className="mx-auto max-w-6xl px-10 py-16">
-          <h2 id="values-heading" className="text-2xl font-bold">
-            What we stand for
+      {offers.length > 0 && (
+        <section aria-labelledby="offers-heading" className="mx-auto max-w-6xl px-4 py-12">
+          <div className="mb-6 flex items-baseline justify-between">
+            <h2 id="offers-heading" className="text-2xl font-bold">
+              Offers for you
+            </h2>
+            <Link href="/shop/offers" className="text-sm font-semibold text-brand-teal hover:underline">
+              View all
+            </Link>
+          </div>
+          <ProductGrid items={offers.slice(0, 4)} />
+        </section>
+      )}
+
+      <section aria-labelledby="conditions-heading" className="border-y border-border bg-secondary">
+        <div className="mx-auto max-w-6xl px-4 py-12">
+          <h2 id="conditions-heading" className="text-2xl font-bold">
+            Shop by condition
           </h2>
-          <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {BRAND_VALUES.map((value) => (
-              <li key={value} className="rounded-xl bg-card p-6">
-                <h3 className="font-semibold text-brand-teal">{value}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{VALUE_BLURBS[value]}</p>
+          <p className="mt-2 max-w-2xl text-muted-foreground">
+            Managing something ongoing? Start here.
+          </p>
+          <ul className="mt-6 flex flex-wrap gap-3">
+            {conditions.map((condition) => (
+              <li key={condition.slug}>
+                <Link
+                  href={`/shop/condition/${condition.slug}`}
+                  className="inline-block rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold hover:border-brand-teal"
+                >
+                  {condition.label}
+                  <span className="ml-1.5 text-xs font-normal text-muted-foreground">
+                    {condition.productCount}
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <footer className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-10 py-10 text-sm text-muted-foreground">
-          <p>
-            Prescription-only medicines are dispensed only against a valid prescription verified by
-            a pharmacist registered with the Pharmacy and Poisons Board.
-          </p>
-          <p className="mt-2">&copy; {new Date().getFullYear()} SplendMed Pharmacy</p>
-        </div>
-      </footer>
-    </main>
+      <section aria-labelledby="featured-heading" className="mx-auto max-w-6xl px-4 py-12">
+        <h2 id="featured-heading" className="mb-6 text-2xl font-bold">
+          From our shelves
+        </h2>
+        <ProductGrid items={featured} />
+      </section>
+    </>
   );
 }
