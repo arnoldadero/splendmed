@@ -14,14 +14,19 @@ Section references like §3.1 throughout the codebase point there.
 | Phase | Scope | State |
 |---|---|---|
 | 0 | Foundation — monorepo, brand system, Supabase plumbing, CI guardrails | **done** |
-| 1 | Auth, roles, RLS spine | next |
-| 2 | Juleb port + mock driver | pending |
-| 3 | Catalog | pending |
+| 2 | Juleb port, mock driver, contract tests | **done** |
+| 3 | Storefront UI (MyDawa patterns), reading the mock | **partial** — UI done, Postgres projection pending |
+| 1 | Auth, roles, RLS spine | **blocked** — needs a working local database |
 | 4 | Cart, prescription upload, checkout | pending |
 | 5 | Payments (M-Pesa) | pending |
 | 6 | Pharmacist Rx console | pending |
 | 7 | Order push + admin | pending |
 | 8 | Hardening | pending |
+
+> **Phases 1 and 4-8 are blocked on the local database.** `supabase start` fails on
+> this machine with `Error response from daemon: read-only file system` — Docker's VM
+> disk cannot be written to. Phases 2 and 3 were built without it: the Juleb mock and
+> the storefront need no Postgres. See "Known blocker" below.
 
 ## Requirements
 
@@ -95,3 +100,25 @@ docs/              integrations, compliance, ADRs
 scripts/           CI guardrails and their regression test
 prompts/           the build specification
 ```
+
+## Known blocker: local database
+
+`pnpm db:start` currently fails:
+
+```
+Error response from daemon: read-only file system
+```
+
+Docker's own VM filesystem is read-only, so no Supabase image can be pulled. The host
+C: drive also reached 100% full during this work (it has since recovered to a few GB).
+Two things to check, in order:
+
+1. **Docker Desktop disk.** Its WSL data sits at
+   `%LOCALAPPDATA%\Docker\wsl` and measured ~26 GB. Reclaiming space inside Docker
+   (`docker system prune`) or growing its disk image in Docker Desktop settings is the
+   likely fix. Note another project's Supabase stack (`shika-sales`) is running on this
+   machine — pruning will affect it, so check with its owner first.
+2. **Host disk.** C: is 238 GB and was at 100%. `AppData` alone is 52 GB.
+
+Our ports were moved off the defaults (`5432x` to `5442x`) because `shika-sales`
+already holds them, so the two stacks can run side by side once Docker is healthy.
