@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Archivo } from 'next/font/google';
 
 import { SiteHeader } from '@/components/site-header';
+import { siteUrl } from '@/lib/site';
 
 import './globals.css';
 
@@ -16,6 +17,7 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl()),
   title: {
     default: 'SplendMed Pharmacy — Trusted medication and wellness care',
     template: '%s · SplendMed Pharmacy',
@@ -24,6 +26,13 @@ export const metadata: Metadata = {
     'SplendMed Pharmacy in Kisumu blends trusted medication with holistic wellness care. Order medication, upload a prescription, and have it reviewed by a licensed pharmacist.',
   applicationName: 'SplendMed',
   icons: { icon: '/brand/icon.png' },
+  openGraph: {
+    type: 'website',
+    siteName: 'SplendMed Pharmacy',
+    locale: 'en_KE',
+    images: [{ url: '/brand/logo-primary.png', width: 1618, height: 947 }],
+  },
+  twitter: { card: 'summary_large_image' },
 };
 
 export const viewport: Viewport = {
