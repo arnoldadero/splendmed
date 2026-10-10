@@ -52,3 +52,7 @@ apps/web/playwright-report/
 apps/web/.playwright/
 
 .vercel
+
+# Locally installed Claude Code skills: tooling, not product code. They belong
+# to whoever installed them and must not ship in this public repo.
+.claude/skills/
