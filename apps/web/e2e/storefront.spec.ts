@@ -136,25 +136,33 @@ test.describe('cart', () => {
   });
 
   test('an out-of-stock product offers notify-me instead of add-to-cart', async ({ page }) => {
-    // Losartan is zero-stock at the Kisumu CBD branch in the fixtures.
-    await page.goto('/products/losartan-potassium-50mg');
+    // Found from the catalogue rather than named: which product is out of stock
+    // changes whenever the fixtures regenerate.
+    await page.goto('/shop');
+    await expect(page.getByTestId('notify-me').first()).toBeVisible();
 
-    await expect(page.getByTestId('notify-me')).toBeVisible();
-    await expect(page.getByTestId('add-to-cart')).toHaveCount(0);
+    // Inside that card there is no add control at all, not a disabled one.
+    const card = page.locator('article').filter({ has: page.getByTestId('notify-me') }).first();
+    await expect(card.getByTestId('add-to-cart')).toHaveCount(0);
   });
 });
 
 test.describe('checkout', () => {
-  test('is honest that it cannot take an order yet', async ({ page, context }) => {
+  test('an over-the-counter order needs no prescription and totals correctly', async ({
+    page,
+    context,
+  }) => {
     await context.clearCookies();
     await page.goto('/products/panadol-extra-500mg-65mg');
     await page.getByTestId('add-to-cart').click();
     await expect(page.getByTestId('cart-count')).toHaveText('(1)');
 
     await page.goto('/checkout');
-    const notice = page.getByTestId('checkout-notice');
-    await expect(notice).toContainText('Checkout is not live yet');
-    await expect(notice).toContainText('Nothing has been charged');
+    // Panadol Extra is KES 450 and Kisumu delivery is KES 200.
+    await expect(page.getByTestId('checkout-total')).toHaveText('KES 650');
+    // Nothing in this cart requires a prescription, so no upload is asked for.
+    await expect(page.getByLabel('Upload your prescription')).toHaveCount(0);
+    await expect(page.getByTestId('place-order')).toBeVisible();
   });
 });
 
