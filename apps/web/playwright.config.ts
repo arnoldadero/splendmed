@@ -48,6 +48,9 @@ export default defineConfig({
       NEXT_PUBLIC_SUPABASE_URL: 'http://127.0.0.1:54421',
       NEXT_PUBLIC_SUPABASE_ANON_KEY: 'e2e-placeholder-anon-key',
       JULEB_DRIVER: 'mock',
+      // Hermetic: a local E2E run reads the Juleb mock, never the live database,
+      // even when .env.local points at a real Supabase project.
+      CATALOG_SOURCE: 'juleb',
     },
   } }),
 });

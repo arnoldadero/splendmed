@@ -6,11 +6,18 @@
   "scripts": {
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "sync:catalog": "tsx src/cli/sync-catalog.ts"
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.8",
+    "@types/pg": "^8.23.1",
     "typescript": "^5.7.2",
     "vitest": "^5.0.3"
+  },
+  "dependencies": {
+    "@splendmed/domain": "workspace:^",
+    "@splendmed/juleb": "workspace:^",
+    "pg": "^8.23.1"
   }
 }

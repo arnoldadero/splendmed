@@ -6,15 +6,15 @@ import {
 } from '@splendmed/domain';
 import { getJulebClient } from '@splendmed/juleb';
 
+import { loadShelfFromPostgres } from '@/lib/catalog-postgres';
 import { localImageFor } from '@/lib/product-images';
 
 /**
  * Server-side catalog access.
  *
- * Phase 3 interim: reads straight through the Juleb port so the storefront can be
- * built and reviewed before the Postgres projection exists. The component layer
- * takes domain types, so swapping this module to read `products` /
- * `inventory_levels` changes nothing above it.
+ * Reads the Postgres projection in production and the Juleb port in tests (see
+ * catalogSource below). The component layer takes domain types, so the source
+ * can change without anything above this module noticing.
  *
  * Never import this from a client component — it resolves the Juleb driver, which
  * reads server-only configuration.
@@ -83,34 +83,54 @@ function slugForTaxon(id: string): string {
   return id.replace(/^J[CH]-/, '').toLowerCase();
 }
 
-async function loadAllProducts(): Promise<readonly Product[]> {
+/**
+ * Where the catalogue comes from — the single decision point (§8.2 forbids
+ * `if (mock)` branches scattered through feature code).
+ *
+ *  - `postgres`: the projection that sync-catalog fills. Production.
+ *  - `juleb`: straight through the Juleb port. Tests and local runs without a
+ *    database.
+ *
+ * Explicit rather than inferred from whether Supabase is configured, so a
+ * misconfigured deploy fails loudly instead of quietly serving the mock.
+ */
+function catalogSource(): 'postgres' | 'juleb' {
+  const source = process.env.CATALOG_SOURCE ?? 'juleb';
+  if (source === 'postgres' || source === 'juleb') return source;
+  throw new Error(`CATALOG_SOURCE must be "postgres" or "juleb", received "${source}"`);
+}
+
+async function loadShelf(): Promise<{
+  products: readonly Product[];
+  quantities: ReadonlyMap<string, number>;
+}> {
+  if (catalogSource() === 'postgres') {
+    return loadShelfFromPostgres(DEFAULT_BRANCH);
+  }
+
   const client = getJulebClient();
   const collected: Product[] = [];
   let cursor: string | null = null;
-
-  // Walk every page. The catalog is small today; once this reads the Postgres
-  // projection the pagination belongs in the query instead.
   do {
     const page = await client.listProducts(cursor ? { cursor, limit: 100 } : { limit: 100 });
     collected.push(...page.products);
     cursor = page.nextCursor;
   } while (cursor);
-
-  return collected.filter((p) => p.isActive);
-}
-
-export async function getCatalog(): Promise<readonly CatalogItem[]> {
-  const products = await loadAllProducts();
-  const client = getJulebClient();
+  const products = collected.filter((p) => p.isActive);
 
   const stock = await client.getStock({
     branchId: DEFAULT_BRANCH,
     julebProductIds: products.flatMap((p) => (p.julebProductId ? [p.julebProductId] : [])),
   });
-  const byProduct = new Map(stock.map((s) => [s.productId, s]));
+  return { products, quantities: new Map(stock.map((s) => [s.productId, s.quantityAvailable])) };
+}
+
+export async function getCatalog(): Promise<readonly CatalogItem[]> {
+  const { products, quantities } = await loadShelf();
 
   return products.map((product) => {
-    const level = product.julebProductId ? byProduct.get(product.julebProductId) : undefined;
+    const quantity = product.julebProductId ? quantities.get(product.julebProductId) : undefined;
+    const level = quantity === undefined ? undefined : { quantityAvailable: quantity };
     return {
       // Juleb's own image wins; otherwise fall back to photography supplied in
       // public/products/. ProductImage draws the dosage form if neither exists.
