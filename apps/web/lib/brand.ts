@@ -37,13 +37,14 @@ export const BRAND_VALUES = [
 export type BrandValue = (typeof BRAND_VALUES)[number];
 
 export type LogoVariant =
-  | 'primary'
+  | 'colour'
+  | 'on-dark'
   | 'white'
   | 'black'
   | 'icon'
+  | 'icon-deep'
   | 'icon-white'
-  | 'icon-black'
-  | 'green';
+  | 'icon-black';
 
 export interface LogoAsset {
   /** Public path. Kept URL-safe: the original filenames had spaces and @. */
@@ -55,17 +56,29 @@ export interface LogoAsset {
 }
 
 /**
- * Intrinsic dimensions are read from the PNG headers, not estimated, so
- * next/image reserves the correct space and no layout shift occurs.
+ * Logo files, cropped to their real content.
+ *
+ * Every supplied file was exported on the same ~1618x948 artboard, so the
+ * wordmarks used 33% of their canvas and the icons 13%. Rendered at a header
+ * height of 32px the actual mark was about 14px tall. The files are now cropped
+ * to the content plus a 6px margin for anti-aliased edges; only transparent
+ * canvas was removed, so no pixel of the logo itself changed. Originals are in
+ * docs/brand/original-artboards/. See docs/decisions/0002-logo-clear-space.md.
+ *
+ * `colour` is the full-colour primary mark — teal Splend, lime Med — and is the
+ * one for light backgrounds. It was previously shipped as an unused
+ * "artboard-1.png" while the header used the light-grey on-dark variant on a
+ * white background, which is why the logo was barely visible.
  */
 export const LOGO_ASSETS: Record<LogoVariant, LogoAsset> = {
-  primary: { src: '/brand/logo-primary.png', width: 1618, height: 947, isSubmark: false },
-  white: { src: '/brand/logo-white.png', width: 1618, height: 947, isSubmark: false },
-  black: { src: '/brand/logo-black.png', width: 1618, height: 947, isSubmark: false },
-  icon: { src: '/brand/icon.png', width: 1618, height: 948, isSubmark: true },
-  'icon-white': { src: '/brand/icon-white.png', width: 1617, height: 948, isSubmark: true },
-  'icon-black': { src: '/brand/icon-black.png', width: 1618, height: 948, isSubmark: true },
-  green: { src: '/brand/icon-green.png', width: 1618, height: 948, isSubmark: true },
+  colour: { src: '/brand/logo-colour.png', width: 1243, height: 424, isSubmark: false },
+  'on-dark': { src: '/brand/logo-on-dark.png', width: 1243, height: 424, isSubmark: false },
+  white: { src: '/brand/logo-white.png', width: 1243, height: 424, isSubmark: false },
+  black: { src: '/brand/logo-black.png', width: 1243, height: 424, isSubmark: false },
+  icon: { src: '/brand/icon-colour.png', width: 419, height: 497, isSubmark: true },
+  'icon-deep': { src: '/brand/icon-deep.png', width: 418, height: 497, isSubmark: true },
+  'icon-white': { src: '/brand/icon-white.png', width: 418, height: 497, isSubmark: true },
+  'icon-black': { src: '/brand/icon-black.png', width: 419, height: 497, isSubmark: true },
 };
 
 /** Clear space in pixels for a logo rendered at the given height. */

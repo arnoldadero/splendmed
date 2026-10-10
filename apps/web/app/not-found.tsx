@@ -6,7 +6,7 @@ export const metadata = { title: 'Page not found' };
 export default function NotFound() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-20 text-center">
-      <p className="text-sm font-semibold uppercase tracking-widest text-brand-teal">404</p>
+      <p className="text-sm font-semibold uppercase tracking-widest text-primary">404</p>
       <h1 className="mt-3 text-3xl font-bold">We could not find that page</h1>
       <p className="mt-4 text-muted-foreground">
         It may have moved, or the product may no longer be stocked.

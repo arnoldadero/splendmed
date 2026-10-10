@@ -26,7 +26,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ id: str
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10">
-      <Link href="/console" className="text-sm font-semibold text-brand-teal hover:underline">
+      <Link href="/console" className="text-sm font-semibold text-primary hover:underline">
         Back to queue
       </Link>
 
@@ -62,7 +62,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ id: str
                   {line.controlled ? (
                     <span className="ml-2 text-xs font-bold text-destructive">Controlled</span>
                   ) : line.rx ? (
-                    <span className="ml-2 text-xs font-semibold text-brand-teal">Rx</span>
+                    <span className="ml-2 text-xs font-semibold text-primary">Rx</span>
                   ) : null}
                 </span>
                 <span>

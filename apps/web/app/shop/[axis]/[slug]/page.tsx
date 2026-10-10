@@ -40,7 +40,7 @@ export default async function TaxonPage({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <p className="text-sm font-semibold uppercase tracking-widest text-brand-teal">
+      <p className="text-sm font-semibold uppercase tracking-widest text-primary">
         {axis === 'condition' ? 'Condition' : axis === 'brand' ? 'Brand' : 'Category'}
       </p>
       <h1 className="mt-2 text-3xl font-bold">

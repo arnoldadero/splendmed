@@ -23,6 +23,7 @@
     "@electric-sql/pglite": "^0.5.8",
     "@eslint/js": "^10.0.1",
     "next": "15",
+    "pngjs": "^7.0.0",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "supabase": "^2.120.0",

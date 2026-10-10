@@ -49,7 +49,7 @@ export default async function CartPage() {
           const needsRx = item.product.dispensing !== 'otc';
           return (
             <li key={item.product.id} className="flex flex-wrap gap-4 py-5" data-testid="cart-line">
-              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-secondary p-3 text-brand-teal">
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-secondary p-3 text-primary">
                 <ProductImage product={item.product} className="h-full w-full" />
               </div>
 
@@ -63,7 +63,7 @@ export default async function CartPage() {
                   {[item.product.strength, item.product.packSize].filter(Boolean).join(' · ')}
                 </p>
                 {needsRx && (
-                  <p className="mt-1 text-xs font-semibold text-brand-teal">Prescription required</p>
+                  <p className="mt-1 text-xs font-semibold text-primary">Prescription required</p>
                 )}
 
                 <div className="mt-3 flex items-center gap-3">
@@ -91,7 +91,7 @@ export default async function CartPage() {
                     />
                     <button
                       type="submit"
-                      className="text-xs font-semibold text-brand-teal hover:underline"
+                      className="text-xs font-semibold text-primary hover:underline"
                     >
                       Update
                     </button>
@@ -138,7 +138,7 @@ export default async function CartPage() {
       </div>
 
       {cart.requiresPrescription && (
-        <p className="mt-6 rounded-lg border border-brand-teal bg-brand-teal/5 p-4 text-sm">
+        <p className="mt-6 rounded-lg border border-primary bg-primary/5 p-4 text-sm">
           <strong className="font-semibold text-brand-deep">
             Your cart contains prescription medicine.
           </strong>{' '}

@@ -16,7 +16,7 @@ export function ComingInPhase({
 }) {
   return (
     <div className="mx-auto max-w-2xl px-4 py-16">
-      <p className="text-sm font-semibold uppercase tracking-widest text-brand-teal">{phase}</p>
+      <p className="text-sm font-semibold uppercase tracking-widest text-primary">{phase}</p>
       <h1 className="mt-2 text-3xl font-bold">{title}</h1>
       <p className="mt-4 text-muted-foreground">{what}</p>
       <Link

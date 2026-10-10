@@ -61,7 +61,7 @@ export default function CreditsPage() {
         pack SplendMed dispenses — always read the label on what you receive.
       </p>
 
-      <Link href="/" className="mt-8 inline-block font-semibold text-brand-teal hover:underline">
+      <Link href="/" className="mt-8 inline-block font-semibold text-primary hover:underline">
         Back to the shop
       </Link>
     </div>

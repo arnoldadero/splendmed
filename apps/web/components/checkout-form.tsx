@@ -100,7 +100,7 @@ export function CheckoutForm({ requiresPrescription }: { requiresPrescription: b
       </fieldset>
 
       {requiresPrescription && (
-        <div className="rounded-lg border border-brand-teal bg-brand-teal/5 p-4">
+        <div className="rounded-lg border border-primary bg-primary/5 p-4">
           <label htmlFor="rx" className="block font-semibold text-brand-deep">
             Upload your prescription
           </label>

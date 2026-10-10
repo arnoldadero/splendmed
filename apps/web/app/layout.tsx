@@ -25,12 +25,12 @@ export const metadata: Metadata = {
   description:
     'SplendMed Pharmacy in Kisumu blends trusted medication with holistic wellness care. Order medication, upload a prescription, and have it reviewed by a licensed pharmacist.',
   applicationName: 'SplendMed',
-  icons: { icon: '/brand/icon.png' },
+  icons: { icon: '/brand/icon-colour.png' },
   openGraph: {
     type: 'website',
     siteName: 'SplendMed Pharmacy',
     locale: 'en_KE',
-    images: [{ url: '/brand/logo-primary.png', width: 1618, height: 947 }],
+    images: [{ url: '/brand/logo-colour.png', width: 1243, height: 424 }],
   },
   twitter: { card: 'summary_large_image' },
 };

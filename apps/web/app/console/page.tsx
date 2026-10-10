@@ -18,7 +18,7 @@ export default async function ConsolePage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <p className="text-sm font-semibold uppercase tracking-widest text-brand-teal">
+      <p className="text-sm font-semibold uppercase tracking-widest text-primary">
         Pharmacist console
       </p>
       <h1 className="mt-2 text-3xl font-bold">Prescription review queue</h1>
@@ -48,7 +48,7 @@ export default async function ConsolePage() {
               <li key={order.id}>
                 <Link
                   href={`/console/${order.id}`}
-                  className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-card p-4 hover:border-brand-teal"
+                  className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-card p-4 hover:border-primary"
                   data-testid="queue-item"
                 >
                   <div>

@@ -14,7 +14,7 @@ export default async function CheckoutPage() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-16 text-center">
         <h1 className="text-3xl font-bold">Nothing to check out</h1>
-        <Link href="/" className="mt-6 inline-block font-semibold text-brand-teal hover:underline">
+        <Link href="/" className="mt-6 inline-block font-semibold text-primary hover:underline">
           Back to the shop
         </Link>
       </div>
@@ -35,7 +35,7 @@ export default async function CheckoutPage() {
               {item.product.strength ? ` ${item.product.strength}` : ''}
               <span className="text-muted-foreground"> × {quantity}</span>
               {item.product.dispensing !== 'otc' && (
-                <span className="ml-2 text-xs font-semibold text-brand-teal">Rx</span>
+                <span className="ml-2 text-xs font-semibold text-primary">Rx</span>
               )}
             </span>
             <span className="font-semibold">{formatMoney(lineTotal)}</span>

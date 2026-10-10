@@ -37,3 +37,27 @@ Request trimmed, tightly-cropped exports of each logo variant — transparent ba
 artboard padding — from Teilyn Media, who authored the guideline. With those, the enforced
 50% becomes exact instead of approximate, and dense layouts such as the pharmacist console
 header become usable.
+
+## Resolution — 2026-10-10
+
+Resolved by measurement rather than by waiting on trimmed exports.
+
+Reading each PNG's alpha channel showed the wordmarks used **33%** of their canvas
+and the icons **13%**. In the header at 32px the visible logo was about 14px tall,
+with the enforced clear space added on top of the baked-in margin. Every file is
+now cropped to its content plus a 6px margin for anti-aliased edges. Only
+transparent canvas was removed — no pixel of the mark changed, so this stays
+within the guideline's no-alteration rule. Originals are preserved in
+`docs/brand/original-artboards/`.
+
+A second, larger fault surfaced at the same time. The file mapped as "primary"
+(`Main Logo 4- Combination@4x.png`) is the **light-grey wordmark for dark
+backgrounds**, and it had been shipped on a white header. The full-colour primary
+mark — teal Splend, lime Med — was the file dismissed as `Artboard 1@4x.png`. It
+was chosen by filename rather than by looking at it.
+
+Files are renamed to say what they are (`logo-colour`, `logo-on-dark`,
+`icon-colour`, `icon-deep`), `<Logo>` defaults to `auto` — full colour on light,
+on-dark in dark mode, swapped in CSS with no JavaScript — and the clear space is
+now the guideline's exact 50%. Tests fail if an uncropped asset returns or if any
+`/brand` path in source points at a missing file.

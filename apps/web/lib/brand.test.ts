@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
@@ -55,7 +55,7 @@ describe('logo assets', () => {
   const variants = Object.keys(LOGO_ASSETS) as LogoVariant[];
 
   it('covers every declared variant', () => {
-    expect(variants).toHaveLength(7);
+    expect(variants).toHaveLength(8);
   });
 
   // A broken asset path renders as a silent empty box in production. Catch it here.
@@ -96,15 +96,75 @@ describe('clear space', () => {
 
 describe('scaled width', () => {
   it('preserves the intrinsic aspect ratio', () => {
-    const asset = LOGO_ASSETS.primary;
+    const asset = LOGO_ASSETS.colour;
     const height = 100;
     const expected = Math.round((asset.width / asset.height) * height);
-    expect(scaledWidthFor('primary', height)).toBe(expected);
+    expect(scaledWidthFor('colour', height)).toBe(expected);
   });
 
   it('never returns a degenerate width', () => {
     for (const variant of Object.keys(LOGO_ASSETS) as LogoVariant[]) {
       expect(scaledWidthFor(variant, 40)).toBeGreaterThan(0);
     }
+  });
+});
+
+/*
+ * Regression guard for the bug that made the logo invisible: every file had been
+ * exported on a ~1618x948 artboard, so the mark used 13-33% of its canvas and
+ * rendered at a fraction of the requested height. If an uncropped asset is ever
+ * dropped back in, this fails.
+ */
+describe('logo assets are cropped to their content', () => {
+  it.each(Object.keys(LOGO_ASSETS) as LogoVariant[])(
+    'variant "%s" has no large transparent border',
+    (variant) => {
+      const asset = LOGO_ASSETS[variant];
+      // Wordmarks are ~2.9:1 and icons ~0.84:1. The old artboard was 1.71:1 for
+      // every file, which is the tell that nothing had been cropped.
+      const ratio = asset.width / asset.height;
+      expect(ratio).not.toBeCloseTo(1618 / 948, 1);
+    },
+  );
+
+  it('the default light-background mark is the full-colour one', () => {
+    // "logo-colour.png" — teal Splend, lime Med. Shipping the light-grey on-dark
+    // variant on a white header is what made the logo barely visible.
+    expect(LOGO_ASSETS.colour.src).toBe('/brand/logo-colour.png');
+    expect(LOGO_ASSETS['on-dark'].src).toBe('/brand/logo-on-dark.png');
+  });
+});
+
+/*
+ * String paths to /brand assets are invisible to the type checker. Renaming the
+ * logo files left the favicon and the social share image pointing at files that
+ * no longer existed, and nothing failed. This scans the source for every
+ * /brand/ path and checks the file is really there.
+ */
+describe('every /brand path referenced in source exists', () => {
+  const appDir = fileURLToPath(new URL('../app', import.meta.url));
+  const componentsDir = fileURLToPath(new URL('../components', import.meta.url));
+
+  function sourceFiles(dir: string): string[] {
+    return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+      const full = `${dir}/${entry.name}`;
+      if (entry.isDirectory()) return sourceFiles(full);
+      return /\.(tsx?|css)$/.test(entry.name) ? [full] : [];
+    });
+  }
+
+  const referenced = new Set<string>();
+  for (const file of [...sourceFiles(appDir), ...sourceFiles(componentsDir)]) {
+    for (const match of readFileSync(file, 'utf8').matchAll(/\/brand\/[a-z0-9-]+\.png/g)) {
+      referenced.add(match[0]);
+    }
+  }
+
+  it('finds at least the favicon and share image', () => {
+    expect(referenced.size).toBeGreaterThanOrEqual(2);
+  });
+
+  it.each([...referenced])('%s exists in public/', (ref) => {
+    expect(existsSync(`${publicDir}${ref}`)).toBe(true);
   });
 });

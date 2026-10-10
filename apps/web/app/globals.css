@@ -24,6 +24,10 @@
   /* Tints/shades derived from the palette for surfaces and hover states.
      Derivation is allowed; substituting a different hue is not. */
   --color-brand-teal-600: #019b99;
+  /* Same hue as brand teal, darkened until it carries text: 5.18:1 against
+     white. The brand teal itself is 2.66:1 and fails WCAG AA as text or as
+     a button background behind white text. */
+  --color-brand-teal-700: #007a78;
   --color-brand-teal-50: #e6f8f8;
   --color-brand-mint-50: #f1faf6;
   --color-brand-deep-900: #073d3a;
@@ -40,7 +44,10 @@
   --foreground: var(--color-brand-deep);
   --card: var(--color-brand-white);
   --card-foreground: var(--color-brand-deep);
-  --primary: var(--color-brand-teal);
+  /* Was the raw brand teal: white text on it measured 2.66:1 and every primary
+     button on the site failed AA. The darker shade of the same hue passes at
+     5.18:1. Dark mode keeps the bright teal, which passes there at 4.55:1. */
+  --primary: var(--color-brand-teal-700);
   --primary-foreground: var(--color-brand-white);
   --secondary: var(--color-brand-mint-50);
   --secondary-foreground: var(--color-brand-deep);
@@ -52,7 +59,9 @@
   --destructive-foreground: var(--color-brand-white);
   --border: #d9e8e4;
   --input: #d9e8e4;
-  --ring: var(--color-brand-teal);
+  /* Focus indicators need 3:1 against what surrounds them; brand teal on white
+     is 2.66:1, so the ring moves to the accessible shade too. */
+  --ring: var(--color-brand-teal-700);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -96,6 +105,14 @@
 }
 
 @layer base {
+  /* Keeps a focused element, or a #main skip-link target, from landing under
+     the sticky header (WCAG 2.2 AA, Focus Not Obscured). */
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 9rem;
+    }
+  }
+
   * {
     border-color: var(--color-border);
   }

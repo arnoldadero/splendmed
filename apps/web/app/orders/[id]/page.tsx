@@ -19,13 +19,13 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
     order.status === 'rx_rejected'
       ? 'border-destructive'
       : order.status === 'awaiting_rx_review'
-        ? 'border-brand-teal'
+        ? 'border-primary'
         : 'border-brand-mint';
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
       <AdoptPendingRx orderId={order.id} />
-      <p className="text-sm font-semibold uppercase tracking-widest text-brand-teal">
+      <p className="text-sm font-semibold uppercase tracking-widest text-primary">
         Order {order.orderNo}
       </p>
       <h1 className="mt-2 text-3xl font-bold">Thank you, {order.customerName.split(' ')[0]}</h1>
@@ -56,7 +56,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
               {line.strength ? ` ${line.strength}` : ''}
               <span className="text-muted-foreground"> × {line.quantity}</span>
               {line.rx && (
-                <span className="ml-2 text-xs font-semibold text-brand-teal">Rx</span>
+                <span className="ml-2 text-xs font-semibold text-primary">Rx</span>
               )}
             </span>
             <span className="font-semibold">
@@ -76,7 +76,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
           : 'Collect at SplendMed Kisumu CBD. We will text you when it is ready.'}
       </p>
 
-      <Link href="/" className="mt-8 inline-block font-semibold text-brand-teal hover:underline">
+      <Link href="/" className="mt-8 inline-block font-semibold text-primary hover:underline">
         Continue shopping
       </Link>
     </div>

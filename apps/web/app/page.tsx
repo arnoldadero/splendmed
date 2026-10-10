@@ -25,7 +25,7 @@ export default async function HomePage() {
     <>
       <section aria-labelledby="hero-heading" className="border-b border-border bg-secondary">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:py-20">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-teal">
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary">
             Pharmacy &amp; wellness · Kisumu
           </p>
           <h1
@@ -62,7 +62,7 @@ export default async function HomePage() {
             <h2 id="offers-heading" className="text-2xl font-bold">
               Offers for you
             </h2>
-            <Link href="/shop/offers" className="text-sm font-semibold text-brand-teal hover:underline">
+            <Link href="/shop/offers" className="text-sm font-semibold text-primary hover:underline">
               View all
             </Link>
           </div>
@@ -83,7 +83,7 @@ export default async function HomePage() {
               <li key={condition.slug}>
                 <Link
                   href={`/shop/condition/${condition.slug}`}
-                  className="inline-block rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold hover:border-brand-teal"
+                  className="inline-block rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold hover:border-primary"
                 >
                   {condition.label}
                   <span className="ml-1.5 text-xs font-normal text-muted-foreground">

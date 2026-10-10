@@ -73,7 +73,7 @@ export function ProductCard({ item }: { item: CatalogItem }) {
       </p>
 
       {needsRx && (
-        <p className="mt-2 inline-flex w-fit items-center rounded border border-brand-teal px-1.5 py-0.5 text-xs font-semibold text-brand-teal">
+        <p className="mt-2 inline-flex w-fit items-center rounded border border-primary px-1.5 py-0.5 text-xs font-semibold text-primary">
           Prescription required
         </p>
       )}

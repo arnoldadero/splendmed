@@ -37,7 +37,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           {product.brand && (
             <Link
               href={`/shop/brand/${product.brand.slug}`}
-              className="text-sm font-semibold text-brand-teal hover:underline"
+              className="text-sm font-semibold text-primary hover:underline"
             >
               {product.brand.name}
             </Link>
@@ -89,7 +89,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           */}
           {needsRx && (
             <div
-              className="mt-6 rounded-lg border border-brand-teal bg-brand-teal/5 p-4"
+              className="mt-6 rounded-lg border border-primary bg-primary/5 p-4"
               data-testid="rx-notice"
             >
               <h2 className="font-semibold text-brand-deep">
