@@ -1,48 +1,42 @@
-import type { Money } from '@splendmed/domain';
+import { cookies } from 'next/headers';
+
+import { money, type Money } from '@splendmed/domain';
 
 /**
- * In-memory order and prescription store, for the demo only.
+ * Demo order store, held in a cookie.
  *
- * Phase 4 puts this in Postgres with the §3.2 trigger and Supabase Storage
- * behind signed URLs. That needs a database, which is still blocked, so this
- * stands in: it makes the full journey — order, prescription, pharmacist
- * review, approval — walkable end to end today.
+ * It started in-process and that broke on Vercel: an order created by one
+ * serverless instance was invisible to the next request, which landed on a
+ * different one, so the order page 404'd. A cookie travels with the browser and
+ * is therefore immune to that.
  *
- * Its limits, stated plainly rather than discovered mid-demo: state lives in
- * one server process, so a redeploy or a cold start empties it, and a second
- * instance would not see the first one's orders. Fine for a demo on one box;
- * not a database.
+ * What this buys and what it costs: a demo driven from one browser works
+ * completely — the presenter is both patient and pharmacist, and both read the
+ * same cookie. A second device sees nothing, because it has a different cookie.
+ * For a presented demo that is the right trade; Phase 4 replaces it with
+ * Postgres, where orders are genuinely shared and the §3.2 trigger enforces the
+ * prescription gate in the database.
+ *
+ * The prescription image does not fit in a 4KB cookie, so it lives in
+ * localStorage keyed by order id and is loaded client-side on the review
+ * screen. Phase 4 puts it in Supabase Storage behind a signed URL, which is
+ * what §3.5 actually requires for PHI.
  */
 
+const COOKIE = 'splendmed_demo_orders';
+const MAX_ORDERS = 8;
+
 export type DemoRxStatus = 'pending' | 'approved' | 'rejected';
-export type DemoOrderStatus =
-  | 'awaiting_rx_review'
-  | 'approved'
-  | 'rx_rejected'
-  | 'fulfilling'
-  | 'delivered';
+export type DemoOrderStatus = 'awaiting_rx_review' | 'approved' | 'rx_rejected' | 'delivered';
 
 export interface DemoOrderLine {
   readonly productId: string;
   readonly name: string;
   readonly strength: string | null;
   readonly quantity: number;
-  readonly unitPrice: Money;
-  readonly requiresPrescription: boolean;
-  readonly isControlled: boolean;
-}
-
-export interface DemoPrescription {
-  readonly id: string;
-  /** Data URL of the uploaded image. Demo only — Phase 4 uses signed storage. */
-  readonly imageDataUrl: string | null;
-  readonly fileName: string | null;
-  status: DemoRxStatus;
-  prescriberName: string | null;
-  prescriberRegNo: string | null;
-  reviewedBy: string | null;
-  reviewedAt: string | null;
-  reviewNote: string | null;
+  readonly unitPriceMinor: number;
+  readonly rx: boolean;
+  readonly controlled: boolean;
 }
 
 export interface DemoOrder {
@@ -51,79 +45,99 @@ export interface DemoOrder {
   readonly placedAt: string;
   readonly customerName: string;
   readonly customerPhone: string;
-  readonly lines: readonly DemoOrderLine[];
-  readonly subtotal: Money;
-  readonly deliveryFee: Money;
-  readonly total: Money;
   readonly fulfilment: 'delivery' | 'pickup';
+  readonly lines: readonly DemoOrderLine[];
+  readonly subtotalMinor: number;
+  readonly deliveryFeeMinor: number;
+  readonly totalMinor: number;
   status: DemoOrderStatus;
-  prescription: DemoPrescription | null;
+  /** True when a prescription was attached; the image lives in localStorage. */
+  hasPrescription: boolean;
+  rxStatus: DemoRxStatus | null;
+  reviewedBy: string | null;
+  reviewedAt: string | null;
+  reviewNote: string | null;
+  prescriberName: string | null;
+  prescriberRegNo: string | null;
 }
 
-/** A module-level Map survives between requests in one warm server process. */
-const orders = new Map<string, DemoOrder>();
-let sequence = 0;
+export const asMoney = (minor: number): Money => money(minor, 'KES');
+
+async function read(): Promise<DemoOrder[]> {
+  const raw = (await cookies()).get(COOKIE)?.value;
+  if (!raw) return [];
+  try {
+    const parsed: unknown = JSON.parse(decodeURIComponent(raw));
+    return Array.isArray(parsed) ? (parsed as DemoOrder[]) : [];
+  } catch {
+    // A malformed cookie is user-controlled input, not an exception worth
+    // propagating. Start clean rather than failing the page.
+    return [];
+  }
+}
+
+async function write(orders: readonly DemoOrder[]): Promise<void> {
+  const trimmed = orders.slice(0, MAX_ORDERS);
+  (await cookies()).set(COOKIE, encodeURIComponent(JSON.stringify(trimmed)), {
+    path: '/',
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 60 * 60 * 24,
+  });
+}
 
 export function nextOrderNo(): string {
-  sequence += 1;
   const stamp = new Date().toISOString().slice(2, 10).replace(/-/g, '');
-  return `SM-${stamp}-${String(sequence).padStart(3, '0')}`;
+  return `SM-${stamp}-${Math.floor(100 + Math.random() * 900)}`;
 }
 
-export function putOrder(order: DemoOrder): void {
-  orders.set(order.id, order);
+export async function putOrder(order: DemoOrder): Promise<void> {
+  const orders = await read();
+  await write([order, ...orders.filter((o) => o.id !== order.id)]);
 }
 
-export function getOrder(id: string): DemoOrder | undefined {
-  return orders.get(id);
+export async function getOrder(id: string): Promise<DemoOrder | undefined> {
+  return (await read()).find((o) => o.id === id);
 }
 
-/** Newest first — the console wants the queue, the account wants history. */
-export function listOrders(): readonly DemoOrder[] {
-  return [...orders.values()].sort((a, b) => b.placedAt.localeCompare(a.placedAt));
+export async function listOrders(): Promise<readonly DemoOrder[]> {
+  return read();
 }
 
-/** The pharmacist queue: oldest first, because waiting time is the priority. */
-export function listPendingReview(): readonly DemoOrder[] {
-  return [...orders.values()]
-    .filter((o) => o.status === 'awaiting_rx_review' && o.prescription?.status === 'pending')
+/** Pharmacist queue: oldest first, because waiting time is the priority. */
+export async function listPendingReview(): Promise<readonly DemoOrder[]> {
+  return (await read())
+    .filter((o) => o.status === 'awaiting_rx_review' && o.rxStatus === 'pending')
     .sort((a, b) => a.placedAt.localeCompare(b.placedAt));
 }
 
-export function countPendingReview(): number {
-  return listPendingReview().length;
-}
-
 /**
- * Records a pharmacist decision.
- *
- * The §3.2 invariant in software form: an order carrying a prescription-only
- * item only reaches a fulfilment state through this function, and only with a
- * named reviewer attached. In Phase 4 the database enforces the same thing with
- * a trigger, so a bug here cannot bypass it.
+ * Records a pharmacist decision — the only path into a fulfilment state, and it
+ * refuses to run without a named reviewer. Phase 4 enforces the same invariant
+ * with a database trigger, so a bug here cannot bypass it.
  */
-export function recordReview(args: {
+export async function recordReview(args: {
   orderId: string;
   decision: 'approve' | 'reject';
   reviewer: string;
-  // Explicit `| undefined`: tsconfig sets exactOptionalPropertyTypes, so an
-  // optional property is not the same as one that may be passed as undefined,
-  // and Zod's parse output carries the latter.
   prescriberName?: string | undefined;
   prescriberRegNo?: string | undefined;
   note?: string | undefined;
-}): DemoOrder | undefined {
-  const order = orders.get(args.orderId);
-  if (!order?.prescription) return undefined;
+}): Promise<DemoOrder | undefined> {
+  const orders = await read();
+  const order = orders.find((o) => o.id === args.orderId);
+  if (!order || !args.reviewer.trim()) return undefined;
 
-  order.prescription.status = args.decision === 'approve' ? 'approved' : 'rejected';
-  order.prescription.reviewedBy = args.reviewer;
-  order.prescription.reviewedAt = new Date().toISOString();
-  order.prescription.reviewNote = args.note ?? null;
-  if (args.prescriberName) order.prescription.prescriberName = args.prescriberName;
-  if (args.prescriberRegNo) order.prescription.prescriberRegNo = args.prescriberRegNo;
-
+  order.rxStatus = args.decision === 'approve' ? 'approved' : 'rejected';
   order.status = args.decision === 'approve' ? 'approved' : 'rx_rejected';
+  order.reviewedBy = args.reviewer;
+  order.reviewedAt = new Date().toISOString();
+  order.reviewNote = args.note ?? null;
+  order.prescriberName = args.prescriberName ?? null;
+  order.prescriberRegNo = args.prescriberRegNo ?? null;
+
+  await write(orders);
   return order;
 }
 
@@ -138,8 +152,7 @@ export const ORDER_STATUS_COPY: Record<DemoOrderStatus, { label: string; detail:
   },
   rx_rejected: {
     label: 'Prescription needs attention',
-    detail: 'Our pharmacist could not approve this prescription. See their note below.',
+    detail: 'Our pharmacist could not approve this prescription. Their note is below.',
   },
-  fulfilling: { label: 'Being prepared', detail: 'Your order is being packed at Kisumu CBD.' },
   delivered: { label: 'Delivered', detail: 'Your order has been delivered.' },
 };

@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation';
 import { formatMoney } from '@splendmed/domain';
 
 import { reviewPrescription } from '@/lib/actions/orders';
-import { getOrder } from '@/lib/demo-store';
+import { RxImage } from '@/components/rx-storage';
+import { asMoney, getOrder } from '@/lib/demo-store';
 
 export const metadata = { title: 'Review prescription' };
 
@@ -18,11 +19,10 @@ export const metadata = { title: 'Review prescription' };
  */
 export default async function ReviewPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const order = getOrder(id);
-  if (!order?.prescription) notFound();
+  const order = await getOrder(id);
+  if (!order) notFound();
 
-  const rx = order.prescription;
-  const controlled = order.lines.some((l) => l.isControlled);
+  const controlled = order.lines.some((l) => l.controlled);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10">
@@ -47,19 +47,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ id: str
       <div className="mt-8 grid gap-8 lg:grid-cols-2">
         <div>
           <h2 className="font-semibold">Prescription</h2>
-          {rx.imageDataUrl ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
-              src={rx.imageDataUrl}
-              alt="Prescription submitted by the patient"
-              className="mt-2 w-full rounded-lg border border-border object-contain"
-              data-testid="rx-image"
-            />
-          ) : (
-            <p className="mt-2 rounded-lg border border-border p-6 text-muted-foreground">
-              No image attached.
-            </p>
-          )}
+          <RxImage orderId={order.id} />
         </div>
 
         <div>
@@ -71,17 +59,14 @@ export default async function ReviewPage({ params }: { params: Promise<{ id: str
                   {line.name}
                   {line.strength ? ` ${line.strength}` : ''}
                   <span className="text-muted-foreground"> × {line.quantity}</span>
-                  {line.isControlled ? (
+                  {line.controlled ? (
                     <span className="ml-2 text-xs font-bold text-destructive">Controlled</span>
-                  ) : line.requiresPrescription ? (
+                  ) : line.rx ? (
                     <span className="ml-2 text-xs font-semibold text-brand-teal">Rx</span>
                   ) : null}
                 </span>
                 <span>
-                  {formatMoney({
-                    minor: line.unitPrice.minor * line.quantity,
-                    currency: line.unitPrice.currency,
-                  })}
+                  {formatMoney(asMoney(line.unitPriceMinor * line.quantity))}
                 </span>
               </li>
             ))}

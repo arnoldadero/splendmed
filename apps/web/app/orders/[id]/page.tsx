@@ -3,14 +3,15 @@ import { notFound } from 'next/navigation';
 
 import { formatMoney } from '@splendmed/domain';
 
-import { ORDER_STATUS_COPY, getOrder } from '@/lib/demo-store';
+import { AdoptPendingRx } from '@/components/rx-storage';
+import { ORDER_STATUS_COPY, asMoney, getOrder } from '@/lib/demo-store';
 
 export const metadata = { title: 'Your order' };
 
 /** Order confirmation and live status, as the customer sees it. */
 export default async function OrderPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const order = getOrder(id);
+  const order = await getOrder(id);
   if (!order) notFound();
 
   const status = ORDER_STATUS_COPY[order.status];
@@ -23,6 +24,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
+      <AdoptPendingRx orderId={order.id} />
       <p className="text-sm font-semibold uppercase tracking-widest text-brand-teal">
         Order {order.orderNo}
       </p>
@@ -32,18 +34,16 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
         <h2 className="font-semibold text-brand-deep">{status.label}</h2>
         <p className="mt-1 text-sm text-muted-foreground">{status.detail}</p>
 
-        {order.prescription?.reviewNote && (
+        {order.reviewNote && (
           <p className="mt-3 rounded border border-border bg-background p-3 text-sm">
             <strong className="font-semibold">Pharmacist note:</strong>{' '}
-            {order.prescription.reviewNote}
+            {order.reviewNote}
           </p>
         )}
-        {order.prescription?.reviewedBy && (
+        {order.reviewedBy && (
           <p className="mt-2 text-xs text-muted-foreground">
-            Reviewed by {order.prescription.reviewedBy}
-            {order.prescription.prescriberRegNo
-              ? ` · prescriber reg. ${order.prescription.prescriberRegNo}`
-              : ''}
+            Reviewed by {order.reviewedBy}
+            {order.prescriberRegNo ? ` · prescriber reg. ${order.prescriberRegNo}` : ''}
           </p>
         )}
       </div>
@@ -55,21 +55,18 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
               {line.name}
               {line.strength ? ` ${line.strength}` : ''}
               <span className="text-muted-foreground"> × {line.quantity}</span>
-              {line.requiresPrescription && (
+              {line.rx && (
                 <span className="ml-2 text-xs font-semibold text-brand-teal">Rx</span>
               )}
             </span>
             <span className="font-semibold">
-              {formatMoney({
-                minor: line.unitPrice.minor * line.quantity,
-                currency: line.unitPrice.currency,
-              })}
+              {formatMoney(asMoney(line.unitPriceMinor * line.quantity))}
             </span>
           </li>
         ))}
         <li className="flex justify-between bg-secondary p-4 font-bold">
           <span>Total</span>
-          <span>{formatMoney(order.total)}</span>
+          <span>{formatMoney(asMoney(order.totalMinor))}</span>
         </li>
       </ul>
 

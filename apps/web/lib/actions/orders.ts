@@ -1,13 +1,10 @@
 'use server';
 
-import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
-import { addMoney, money, multiplyMoney } from '@splendmed/domain';
-
-import { getCart } from '@/lib/cart';
-import { writeCartEntries } from '@/lib/cart';
+import { getCart, writeCartEntries } from '@/lib/cart';
 import {
   nextOrderNo,
   putOrder,
@@ -17,7 +14,7 @@ import {
 } from '@/lib/demo-store';
 
 /** Flat Kisumu delivery fee for the demo; zones arrive with real logistics. */
-const DELIVERY_FEE = money(20000);
+const DELIVERY_FEE_MINOR = 20000;
 
 const placeOrderSchema = z.object({
   customerName: z.string().trim().min(2, 'Please give your name').max(80),
@@ -26,20 +23,17 @@ const placeOrderSchema = z.object({
     .trim()
     .regex(/^(\+254|0)[17]\d{8}$/, 'Enter a Kenyan mobile number, e.g. 0712345678'),
   fulfilment: z.enum(['delivery', 'pickup']),
-  /** Data URL produced in the browser. Demo only — Phase 4 uploads to storage. */
-  prescriptionImage: z.string().optional(),
-  prescriptionFileName: z.string().optional(),
+  hasPrescription: z.coerce.boolean().optional(),
 });
 
 export type PlaceOrderResult = { ok: false; error: string };
 
-export async function placeOrder(formData: FormData): Promise<PlaceOrderResult> {
+export async function placeOrder(formData: FormData): Promise<PlaceOrderResult | undefined> {
   const parsed = placeOrderSchema.safeParse({
     customerName: formData.get('customerName'),
     customerPhone: formData.get('customerPhone'),
     fulfilment: formData.get('fulfilment'),
-    prescriptionImage: formData.get('prescriptionImage') || undefined,
-    prescriptionFileName: formData.get('prescriptionFileName') || undefined,
+    hasPrescription: formData.get('hasPrescription') === 'true',
   });
 
   if (!parsed.success) {
@@ -50,11 +44,11 @@ export async function placeOrder(formData: FormData): Promise<PlaceOrderResult> 
   if (cart.lines.length === 0) return { ok: false, error: 'Your cart is empty' };
 
   /*
-   * Guardrail §3.2, enforced server-side. The client cannot talk its way past
-   * this by omitting the field: if any line needs a prescription, one must be
-   * attached before an order exists at all.
+   * Guardrail §3.2, enforced on the server. Removing the file input in the
+   * browser does not get past this: if any line needs a prescription and none
+   * was attached, no order is created at all.
    */
-  if (cart.requiresPrescription && !parsed.data.prescriptionImage) {
+  if (cart.requiresPrescription && !parsed.data.hasPrescription) {
     return { ok: false, error: 'A prescription is required for one or more items in your cart' };
   }
 
@@ -63,16 +57,13 @@ export async function placeOrder(formData: FormData): Promise<PlaceOrderResult> 
     name: item.product.name,
     strength: item.product.strength,
     quantity,
-    unitPrice: item.product.price,
-    requiresPrescription: item.product.dispensing !== 'otc',
-    isControlled: item.product.dispensing === 'controlled',
+    unitPriceMinor: item.product.price.minor,
+    rx: item.product.dispensing !== 'otc',
+    controlled: item.product.dispensing === 'controlled',
   }));
 
-  const subtotal = lines.reduce(
-    (sum, l) => addMoney(sum, multiplyMoney(l.unitPrice, l.quantity)),
-    money(0),
-  );
-  const deliveryFee = parsed.data.fulfilment === 'delivery' ? DELIVERY_FEE : money(0);
+  const subtotalMinor = lines.reduce((sum, l) => sum + l.unitPriceMinor * l.quantity, 0);
+  const deliveryFeeMinor = parsed.data.fulfilment === 'delivery' ? DELIVERY_FEE_MINOR : 0;
 
   const id = `ord_${Math.random().toString(36).slice(2, 10)}`;
   const order: DemoOrder = {
@@ -81,29 +72,23 @@ export async function placeOrder(formData: FormData): Promise<PlaceOrderResult> 
     placedAt: new Date().toISOString(),
     customerName: parsed.data.customerName,
     customerPhone: parsed.data.customerPhone,
-    lines,
-    subtotal,
-    deliveryFee,
-    total: addMoney(subtotal, deliveryFee),
     fulfilment: parsed.data.fulfilment,
+    lines,
+    subtotalMinor,
+    deliveryFeeMinor,
+    totalMinor: subtotalMinor + deliveryFeeMinor,
     // An order with no prescription-only item skips review entirely.
     status: cart.requiresPrescription ? 'awaiting_rx_review' : 'approved',
-    prescription: parsed.data.prescriptionImage
-      ? {
-          id: `rx_${Math.random().toString(36).slice(2, 10)}`,
-          imageDataUrl: parsed.data.prescriptionImage,
-          fileName: parsed.data.prescriptionFileName ?? null,
-          status: 'pending',
-          prescriberName: null,
-          prescriberRegNo: null,
-          reviewedBy: null,
-          reviewedAt: null,
-          reviewNote: null,
-        }
-      : null,
+    hasPrescription: Boolean(parsed.data.hasPrescription),
+    rxStatus: cart.requiresPrescription ? 'pending' : null,
+    reviewedBy: null,
+    reviewedAt: null,
+    reviewNote: null,
+    prescriberName: null,
+    prescriberRegNo: null,
   };
 
-  putOrder(order);
+  await putOrder(order);
   await writeCartEntries(new Map());
 
   revalidatePath('/console');
@@ -130,7 +115,7 @@ export async function reviewPrescription(formData: FormData): Promise<void> {
   });
   if (!parsed.success) return;
 
-  recordReview(parsed.data);
+  await recordReview(parsed.data);
   revalidatePath('/console');
   revalidatePath(`/orders/${parsed.data.orderId}`);
   redirect('/console');

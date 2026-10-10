@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react';
 
 import { placeOrder } from '@/lib/actions/orders';
+import { storePendingRx } from '@/components/rx-storage';
 
 /**
  * Checkout form.
@@ -42,8 +43,10 @@ export function CheckoutForm({ requiresPrescription }: { requiresPrescription: b
         startTransition(async () => {
           setError(null);
           if (preview) {
-            formData.set('prescriptionImage', preview);
-            formData.set('prescriptionFileName', fileName ?? 'prescription');
+            // The image is too large for the order cookie, so it stays in the
+            // browser and only a flag crosses to the server.
+            storePendingRx(preview);
+            formData.set('hasPrescription', 'true');
           }
           const result = await placeOrder(formData);
           // A successful placement redirects, so anything returned is a failure.

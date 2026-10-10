@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { formatMoney } from '@splendmed/domain';
 
-import { listOrders, listPendingReview } from '@/lib/demo-store';
+import { asMoney, listOrders, listPendingReview } from '@/lib/demo-store';
 
 export const metadata = { title: 'Pharmacist console' };
 
@@ -14,8 +14,7 @@ export const metadata = { title: 'Pharmacist console' };
  * realtime; here it is open so the journey can be demonstrated without auth.
  */
 export default async function ConsolePage() {
-  const queue = listPendingReview();
-  const all = listOrders();
+  const [queue, all] = await Promise.all([listPendingReview(), listOrders()]);
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
@@ -40,7 +39,7 @@ export default async function ConsolePage() {
       ) : (
         <ul className="mt-8 space-y-3">
           {queue.map((order) => {
-            const controlled = order.lines.some((l) => l.isControlled);
+            const controlled = order.lines.some((l) => l.controlled);
             const waited = Math.max(
               0,
               Math.round((Date.now() - new Date(order.placedAt).getTime()) / 60000),
@@ -62,11 +61,11 @@ export default async function ConsolePage() {
                       )}
                     </p>
                     <p className="mt-0.5 text-sm text-muted-foreground">
-                      {order.lines.filter((l) => l.requiresPrescription).length} Rx item(s) ·
+                      {order.lines.filter((l) => l.rx).length} Rx item(s) ·
                       waiting {waited} min
                     </p>
                   </div>
-                  <span className="font-semibold">{formatMoney(order.total)}</span>
+                  <span className="font-semibold">{formatMoney(asMoney(order.totalMinor))}</span>
                 </Link>
               </li>
             );
